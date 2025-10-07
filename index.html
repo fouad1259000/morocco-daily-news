@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المغرب اليوم - آخر الأخبار المغربية</title>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -14,126 +15,208 @@
         
         body {
             font-family: 'Readex Pro', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: #f8f9fa;
             line-height: 1.7;
             color: #333;
         }
-        
-        .container {
+
+        /* Header */
+        .top-header {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        .header-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-        
-        .header h1 {
-            color: #2c3e50;
-            font-size: 3em;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            color: #7f8c8d;
-            font-size: 1.3em;
-            font-weight: 400;
-        }
-        
-        /* Stats Bar */
-        .stats-bar {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
         }
-        
-        .stat-item {
-            background: #34495e;
+
+        .logo {
+            font-size: 2em;
+            font-weight: 700;
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #e74c3c;
+        }
+
+        .live-time {
+            background: #e74c3c;
+            padding: 5px 15px;
+            border-radius: 20px;
             font-weight: 600;
             font-size: 0.9em;
         }
-        
+
+        /* Navigation */
+        .main-nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-categories {
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        .nav-categories li {
+            border-left: 1px solid #eee;
+        }
+
+        .nav-categories a {
+            display: block;
+            padding: 15px 25px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-categories a:hover,
+        .nav-categories a.active {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
         /* News Grid */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
-        
+
         .news-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border-right: 5px solid #667eea;
-            position: relative;
+            background: white;
+            border-radius: 15px;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
-        
-        .news-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-        
+
         .news-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
-        
-        .news-category {
+
+        .news-image {
+            width: 100%;
+            height: 200px;
             background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            padding: 6px 15px;
+            font-size: 3em;
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-category {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 12px;
             border-radius: 15px;
             font-size: 0.8em;
             font-weight: 600;
             display: inline-block;
             margin-bottom: 15px;
         }
-        
+
         .news-title {
             color: #2c3e50;
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: 600;
             margin-bottom: 15px;
             line-height: 1.4;
         }
-        
+
+        .news-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .news-title a:hover {
+            color: #e74c3c;
+        }
+
         .news-excerpt {
             color: #5d6d7e;
-            font-size: 1.1em;
-            font-weight: 400;
             margin-bottom: 20px;
-            text-align: justify;
-            line-height: 1.8;
+            line-height: 1.6;
         }
-        
+
         .news-meta {
             display: flex;
             justify-content: space-between;
@@ -142,179 +225,408 @@
             padding-top: 15px;
             color: #7f8c8d;
             font-size: 0.9em;
-            font-weight: 500;
         }
-        
+
         .news-date {
             background: #ecf0f1;
-            padding: 5px 12px;
-            border-radius: 15px;
+            padding: 4px 10px;
+            border-radius: 12px;
         }
-        
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e74c3c;
+        }
+
+        .trending-list {
+            list-style: none;
+        }
+
+        .trending-list li {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .trending-list a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+        }
+
+        .trending-list a:hover {
+            color: #e74c3c;
+        }
+
+        .trending-meta {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
         /* Breaking News */
         .breaking-news {
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
-            padding: 15px 30px;
-            border-radius: 15px;
-            margin-bottom: 25px;
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        .breaking-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
+
         .breaking-badge {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             padding: 5px 15px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.8em;
+            font-size: 0.9em;
+            white-space: nowrap;
         }
-        
-        /* Footer */
-        .footer {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            color: #7f8c8d;
-        }
-        
-        .footer-logo {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .footer p {
-            margin-bottom: 10px;
+
+        .breaking-text {
+            flex: 1;
             font-weight: 500;
         }
-        
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #e74c3c;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2em;
-            }
-            
-            .news-grid {
+            .container {
                 grid-template-columns: 1fr;
             }
             
-            .stats-bar {
-                flex-direction: column;
-                text-align: center;
+            .nav-categories {
+                flex-wrap: wrap;
             }
             
-            .news-card {
-                padding: 20px;
+            .nav-categories li {
+                border-left: none;
+                border-bottom: 1px solid #eee;
+                flex: 1 0 50%;
+            }
+            
+            .hero h1 {
+                font-size: 2.2em;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .stat-item {
+                padding: 10px 15px;
+                font-size: 0.9em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1>المغرب اليوم</h1>
-            <p>منصة إخبارية شاملة تقدم آخر التطورات في المملكة المغربية</p>
-        </header>
-        
-        <!-- Breaking News -->
-        <div class="breaking-news">
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="header-container">
+            <a href="#" class="logo">المغرب<span>اليوم</span></a>
+            <div class="live-time" id="liveTime">الثلاثاء 7 أكتوبر 2025 - 14:30</div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <ul class="nav-categories">
+                <li><a href="#" class="active">الرئيسية</a></li>
+                <li><a href="#">أخبار المغرب</a></li>
+                <li><a href="#">السياسة</a></li>
+                <li><a href="#">الاقتصاد</a></li>
+                <li><a href="#">الرياضة</a></li>
+                <li><a href="#">الثقافة</a></li>
+                <li><a href="#">التكنولوجيا</a></li>
+                <li><a href="#">الصحة</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breaking News -->
+    <div class="breaking-news">
+        <div class="breaking-container">
             <span class="breaking-badge">خبر عاجل</span>
-            <span>اجتماع طارئ للحكومة المغربية لمناقشة المستجدات الإقليمية - 14:30</span>
+            <span class="breaking-text">اجتماع طارئ للحكومة المغربية لمناقشة المستجدات الإقليمية - متابعة حية</span>
         </div>
-        
-        <!-- Stats Bar -->
-        <div class="stats-bar">
-            <div class="stat-item">آخر تحديث: الثلاثاء 7 أكتوبر 2025 - 14:30</div>
-            <div class="stat-item">24 خبرًا</div>
-            <div class="stat-item">مصادر موثوقة</div>
-        </div>
-        
-        <!-- News Grid -->
-        <div class="news-grid">
-            <!-- News Card 1 -->
-            <div class="news-card">
-                <span class="news-category">سياسة</span>
-                <h2 class="news-title">الملك محمد السادس يستقبل مبعوثًا سعوديًا في الدار البيضاء</h2>
-                <p class="news-excerpt">استقبل الملك محمد السادس، اليوم الثلاثاء بالقصر الملكي بالدار البيضاء، الأمير تركي بن محمد بن فهد بن عبد العزيز آل سعود، وزير الدولة، عضو مجلس الوزراء السعودي، مبعوث الملك سلمان بن عبد العزيز آل سعود.</p>
-                <div class="news-meta">
-                    <span class="news-date">2025-10-07 - 12:45</span>
-                    <span>⏱️ 3 دقائق قراءة</span>
-                </div>
-            </div>
-            
-            <!-- News Card 2 -->
-            <div class="news-card">
-                <span class="news-category">اقتصاد</span>
-                <h2 class="news-title">البنك الدولي يرفع توقعات نمو الاقتصاد المغربي إلى 4.4%</h2>
-                <p class="news-excerpt">رفع البنك الدولي توقعاته للنمو في المنطقة التي تشمل الشرق الأوسط وشمال إفريقيا، وجاءت شاملة المغرب بتوقعات محينة لنسبة النمو الاقتصادي المنتظر أن يحقق 4.4% خلال العام الجاري.</p>
-                <div class="news-meta">
-                    <span class="news-date">2025-10-07 - 11:20</span>
-                    <span>⏱️ 4 دقائق قراءة</span>
-                </div>
-            </div>
-            
-            <!-- News Card 3 -->
-            <div class="news-card">
-                <span class="news-category">رياضة</span>
-                <h2 class="news-title">المنتخب الوطني يستعد لمواجهتي البحرين والكونغو</h2>
-                <p class="news-excerpt">أعلن الناخب الوطني وليد الركراكي عن استدعاء اللاعب أنس باش للالتحاق بتجمع المنتخب الوطني المغربي، استعدادًا للمباراتين أمام البحرين وديا ثم الكونغو ضمن آخر جولات تصفيات مونديال 2026.</p>
-                <div class="news-meta">
-                    <span class="news-date">2025-10-07 - 10:15</span>
-                    <span>⏱️ 3 دقائق قراءة</span>
-                </div>
-            </div>
-            
-            <!-- News Card 4 -->
-            <div class="news-card">
-                <span class="news-category">تعليم</span>
-                <h2 class="news-title">جامعة محمد السادس تحتل المرتبة الأولى بشمال إفريقيا</h2>
-                <p class="news-excerpt">وضع تصنيف مجلة تايمز للتعليم العالي العالمي للجامعات لعام 2026 جامعة محمد السادس متعددة التخصصات التقنية في المرتبة 351–400 عالمياً، باعتبارها الأفضل على الصعيد الوطني.</p>
-                <div class="news-meta">
-                    <span class="news-date">2025-10-07 - 09:30</span>
-                    <span>⏱️ 5 دقائق قراءة</span>
-                </div>
-            </div>
-
-            <!-- News Card 5 -->
-            <div class="news-card">
-                <span class="news-category">صحة</span>
-                <h2 class="news-title">وزير الصحة يعلن عن إطلاق الورقة العلاجية الإلكترونية</h2>
-                <p class="news-excerpt">أعلن وزير الصحة والحماية الاجتماعية عن إطلاق الورقة العلاجية الإلكترونية التي ستتيح للمواطنين متابعة حالتهم الصحية وتقليل وقت الانتظار في المستشفيات.</p>
-                <div class="news-meta">
-                    <span class="news-date">2025-10-07 - 08:45</span>
-                    <span>⏱️ 2 دقائق قراءة</span>
-                </div>
-            </div>
-
-            <!-- News Card 6 -->
-            <div class="news-card">
-                <span class="news-category">ثقافة</span>
-                <h2 class="news-title">مهرجان الموسيقى العالمية يعود إلى الرباط الشهر المقبل</h2>
-                <p class="news-excerpt">يعود مهرجان الموسيقى العالمية إلى العاصمة الرباط بمشاركة فنانين من 20 دولة مختلفة، في حدث ثقافي يستمر لمدة أسبوع كامل.</p>
-                <div class="news-meta">
-                    <span class="news-date">2025-10-07 - 16:00</span>
-                    <span>⏱️ 3 دقائق قراءة</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-logo">المغرب اليوم</div>
-            <p>منصة إخبارية مهنية تقدم آخر الأخبار والتطورات في المملكة المغربية</p>
-            <p>شامل · موثوق · دقيق</p>
-            <p>© 2025 المغرب اليوم - جميع الحقوق محفوظة</p>
-            <p style="margin-top: 15px; font-size: 0.9em;">آخر تحديث: 7 أكتوبر 2025 - 14:30</p>
-        </footer>
     </div>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>المغرب اليوم</h1>
+            <p>منصة إخبارية شاملة تقدم آخر التطورات في المملكة المغربية</p>
+            <div class="stats">
+                <div class="stat-item">📰 24 خبرًا جديدًا</div>
+                <div class="stat-item">🕒 آخر تحديث: 14:30</div>
+                <div class="stat-item">🌍 مصادر موثوقة</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- News Grid -->
+        <main class="main-content">
+            <div class="news-grid">
+                <!-- News Card 1 -->
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">سياسة</span>
+                        <h2 class="news-title">
+                            <a href="#">الملك محمد السادس يستقبل مبعوثًا سعوديًا في الدار البيضاء</a>
+                        </h2>
+                        <p class="news-excerpt">استقبل الملك محمد السادس، اليوم الثلاثاء بالقصر الملكي بالدار البيضاء، الأمير تركي بن محمد بن فهد بن عبد العزيز آل سعود، وزير الدولة، عضو مجلس الوزراء السعودي.</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-07 - 12:45</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 2 -->
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">اقتصاد</span>
+                        <h2 class="news-title">
+                            <a href="#">البنك الدولي يرفع توقعات نمو الاقتصاد المغربي إلى 4.4%</a>
+                        </h2>
+                        <p class="news-excerpt">رفع البنك الدولي توقعاته للنمو في المنطقة التي تشمل الشرق الأوسط وشمال إفريقيا، وجاءت شاملة المغرب بتوقعات محينة لنسبة النمو الاقتصادي.</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-07 - 11:20</span>
+                            <span>⏱️ 4 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 3 -->
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">رياضة</span>
+                        <h2 class="news-title">
+                            <a href="#">المنتخب الوطني يستعد لمواجهتي البحرين والكونغو</a>
+                        </h2>
+                        <p class="news-excerpt">أعلن الناخب الوطني وليد الركراكي عن استدعاء اللاعب أنس باش للالتحاق بتجمع المنتخب الوطني المغربي، استعدادًا للمباراتين أمام البحرين وديا ثم الكونغو.</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-07 - 10:15</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 4 -->
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">تعليم</span>
+                        <h2 class="news-title">
+                            <a href="#">جامعة محمد السادس تحتل المرتبة الأولى بشمال إفريقيا</a>
+                        </h2>
+                        <p class="news-excerpt">وضع تصنيف مجلة تايمز للتعليم العالي العالمي للجامعات لعام 2026 جامعة محمد السادس متعددة التخصصات التقنية في المرتبة 351–400 عالمياً.</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-07 - 09:30</span>
+                            <span>⏱️ 5 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 5 -->
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">صحة</span>
+                        <h2 class="news-title">
+                            <a href="#">وزير الصحة يعلن عن إطلاق الورقة العلاجية الإلكترونية</a>
+                        </h2>
+                        <p class="news-excerpt">أعلن وزير الصحة والحماية الاجتماعية عن إطلاق الورقة العلاجية الإلكترونية التي ستتيح للمواطنين متابعة حالتهم الصحية وتقليل وقت الانتظار.</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-07 - 08:45</span>
+                            <span>⏱️ 2 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 6 -->
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">ثقافة</span>
+                        <h2 class="news-title">
+                            <a href="#">مهرجان الموسيقى العالمية يعود إلى الرباط الشهر المقبل</a>
+                        </h2>
+                        <p class="news-excerpt">يعود مهرجان الموسيقى العالمية إلى العاصمة الرباط بمشاركة فنانين من 20 دولة مختلفة، في حدث ثقافي يستمر لمدة أسبوع كامل.</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-07 - 16:00</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">الأكثر قراءة</h3>
+                <ul class="trending-list">
+                    <li>
+                        <a href="#">اجتماع طارئ للحكومة المغربية لمناقشة المستجدات الإقليمية</a>
+                        <div class="trending-meta">2025-10-07 - 14:30</div>
+                    </li>
+                    <li>
+                        <a href="#">البنك الدولي يرفع توقعات نمو الاقتصاد المغربي</a>
+                        <div class="trending-meta">2025-10-07 - 11:20</div>
+                    </li>
+                    <li>
+                        <a href="#">الملك محمد السادس يستقبل مبعوثًا سعوديًا</a>
+                        <div class="trending-meta">2025-10-07 - 12:45</div>
+                    </li>
+                    <li>
+                        <a href="#">المنتخب الوطني يستعد لمواجهتي البحرين والكونغو</a>
+                        <div class="trending-meta">2025-10-07 - 10:15</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">الفئات</h3>
+                <ul class="footer-links">
+                    <li><a href="#">أخبار المغرب</a></li>
+                    <li><a href="#">السياسة</a></li>
+                    <li><a href="#">الاقتصاد</a></li>
+                    <li><a href="#">الرياضة</a></li>
+                    <li><a href="#">الثقافة</a></li>
+                    <li><a href="#">التكنولوجيا</a></li>
+                    <li><a href="#">الصحة</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>المغرب اليوم</h3>
+                <p>منصة إخبارية مهنية تقدم آخر الأخبار والتطورات في المملكة المغربية بشفافية ومهنية.</p>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">عن المغرب اليوم</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                    <li><a href="#">شروط الاستخدام</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>الفئات</h3>
+                <ul class="footer-links">
+                    <li><a href="#">أخبار المغرب</a></li>
+                    <li><a href="#">السياسة</a></li>
+                    <li><a href="#">الاقتصاد</a></li>
+                    <li><a href="#">الرياضة</a></li>
+                    <li><a href="#">الثقافة</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 المغرب اليوم - جميع الحقوق محفوظة | آخر تحديث: <span id="footerTime">الثلاثاء 7 أكتوبر 2025 - 14:30</span></p>
+        </div>
+    </footer>
+
     <script>
-        // Update time automatically
+        // Update live time
         function updateTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('ar-EG', { 
@@ -329,22 +641,12 @@
                 day: 'numeric'
             });
             
-            // Update time in stats bar
-            const statItems = document.querySelectorAll('.stat-item');
-            if (statItems[0]) {
-                statItems[0].textContent = `آخر تحديث: ${dateString} - ${timeString}`;
-            }
-            
-            // Update time in footer
-            const footerTime = document.querySelector('.footer p:last-child');
-            if (footerTime) {
-                footerTime.textContent = `آخر تحديث: ${dateString} - ${timeString}`;
-            }
+            document.getElementById('liveTime').textContent = `${dateString} - ${timeString}`;
+            document.getElementById('footerTime').textContent = `${dateString} - ${timeString}`;
         }
         
-        // Update time every minute
         setInterval(updateTime, 60000);
-        updateTime(); // Initial call
+        updateTime();
     </script>
 </body>
 </html>
