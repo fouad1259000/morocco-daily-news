@@ -1,0 +1,21 @@
+name: Update from n8n Webhook
+
+on:
+  repository_dispatch:
+    types: [n8n-update]
+
+jobs:
+  update-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update HTML
+        run: |
+          echo '${{ github.event.client_payload.html_content }}' > index.html
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add index.html
+          git commit -m "Auto-update: Latest news" || exit 0
+          git push
