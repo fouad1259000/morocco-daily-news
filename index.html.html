@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آخر أخبار المغرب - Morocco Daily News</title>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Readex Pro', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+        
+        .stats {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+            color: #34495e;
+        }
+        
+        .articles-grid {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .article-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-right: 5px solid #667eea;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .article-title {
+            color: #2c3e50;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .article-content {
+            color: #5d6d7e;
+            font-size: 1.1em;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 15px;
+            color: #7f8c8d;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+        
+        .writing-style {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .last-update {
+            background: #34495e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .article-card {
+                padding: 20px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Morocco Daily News</h1>
+            <p>آخر الأخبار والتطورات في المملكة المغربية</p>
+        </header>
+        
+        <div class="stats">
+            <div class="last-update">آخر تحديث: <span id="current-date"></span></div>
+            <div>عدد المقالات: <span id="articles-count">12</span> مقال</div>
+        </div>
+        
+        <div class="articles-grid" id="articles-container">
+            <!-- Articles will be loaded here by JavaScript -->
+            <div style="text-align: center; color: #7f8c8d; padding: 40px;">
+                جاري تحميل الأخبار...
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>Morocco Daily News - منصة إخبارية شاملة</p>
+            <p>© 2024 جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
+
+    <script>
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('ar-EG', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // You can add JavaScript here to fetch articles from an API
+        // For now, this is a static template - you'll update it with your actual articles
+        
+        // Example of how to dynamically add articles:
+        /*
+        const articles = [
+            {
+                title: "عنوان الخبر الأول",
+                content: "محتوى الخبر الأول هنا...",
+                style: "صحفي محترف",
+                date: "2024-01-07"
+            },
+            // ... more articles
+        ];
+        
+        function displayArticles(articles) {
+            const container = document.getElementById('articles-container');
+            container.innerHTML = articles.map(article => `
+                <div class="article-card">
+                    <h2 class="article-title">${article.title}</h2>
+                    <div class="article-content">${article.content}</div>
+                    <div class="article-meta">
+                        <span class="writing-style">${article.style}</span>
+                        <span>${article.date}</span>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('articles-count').textContent = articles.length;
+        }
+        */
+    </script>
+</body>
+</html>
