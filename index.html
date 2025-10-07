@@ -3,230 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آخر أخبار المغرب - Morocco Daily News</title>
+    <title>المغرب اليوم - آخر الأخبار المغربية</title>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* YOUR CSS STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Readex Pro', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.7;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.3em;
+            font-weight: 400;
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .stat-item {
+            background: #34495e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .news-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-right: 5px solid #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .news-category {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .news-title {
+            color: #2c3e50;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .news-excerpt {
+            color: #5d6d7e;
+            font-size: 1.1em;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 15px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
+        .news-date {
+            background: #ecf0f1;
+            padding: 5px 12px;
+            border-radius: 15px;
+        }
+        
+        /* Breaking News */
+        .breaking-news {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .breaking-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8em;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: #7f8c8d;
+        }
+        
+        .footer-logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .news-card {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <header class="header">
-            <h1>Morocco Daily News</h1>
-            <p>آخر الأخبار والتطورات في المملكة المغربية</p>
+            <h1>المغرب اليوم</h1>
+            <p>منصة إخبارية شاملة تقدم آخر التطورات في المملكة المغربية</p>
         </header>
         
-        <div class="stats">
-            <div class="last-update">آخر تحديث: الثلاثاء، ٧ أكتوبر ٢٠٢٥</div>
-            <div>عدد المقالات: 22 مقال</div>
+        <!-- Breaking News -->
+        <div class="breaking-news">
+            <span class="breaking-badge">خبر عاجل</span>
+            <span>اجتماع طارئ للحكومة المغربية لمناقشة المستجدات الإقليمية - 14:30</span>
         </div>
         
-        <div class="articles-grid">
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: ولاية طنجة تراقب أداء المستشفيات</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن بعد موجة الاحتجاجات التي شهدتها مجموعة من مدن جهة طنة، على غرار حواضر مغربية أخرى، ووجّهت انتقادات حادة للقطاع الصحي وطالبت بإصلاحه، يبدو أن السلطات المحلية بتوجيهات من والي جهة طنجة تطوان الحسيمة،.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: "فوكس" الإسباني يهاجم المغرب.. سياسات شعبوية تخدم أجندة داخلية</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن يواصل حزب فوكس الإسباني اليميني تصريف مواقفه العدائية التي تستهدف المملكة المغربية والمضادة للتوجهات السياسية الرسمية لمدريد وبروكسل، التي تنتصر للشراكة الإستراتيجية مع الرباط، إذ اتهم في بيان له ا.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: انخفاض نسبة استهلاك التبغ عالميا</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن كشفت منظمة الصحة العالمية أن استهلاك التبغ عالميا في تراجع، إذ انتقلت نسبة تعاطي التدخين من 26.2 بالمائة عام 2010 إلى 19.5 بالمائة في 2023، مع توقعات باستمرار منحى الانخفاض حتى عام 2030. وأوضح تقري.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: الرئيس السنغالي فاي يستقبل بوريطة</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن استقبل رئيس جمهورية السنغال باسيرو ديوماي فاي، بدكار، وزير الشؤون الخارجية والتعاون الإفريقي والمغاربة المقيمين بالخارج ناصر بوريطة وقبل ذلك استقبل الوزير الأول السنغالي، عثمان سونكو، بوريطة. وجرى .... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: التهراوي: الورقة العلاجية الإلكترونية تساهم في ادخار 100 مليون درهم</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن قال أمين التهراوي، وزير الصحة والحماية الاجتماعية، إن الوزارة تشتغلُ على &#8220;تسريع الرقمنة في قطاع الصحة لضمان الولوج والإنصاف، وإطلاق الورقة العلاجية الإلكترونية التي تتيح للمريض أن يتتبع وضعية.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: محاكمة متابعين في احتجاحات وجدة</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن The post <a href="https://www.hespress.com/%d9%85%d8%ad%d8%a7%d9%83%d9%85%d8%a9-%d9%85%d8%aa%d8%a7%d8%a8%d8%b9%d9%8a%d9%86-%d9%81%d9%8a-%d8%a7%d8%ad%d8%aa%d8%ac%d8%a7%d8%ad%d8%a7%d8%aa-%d9%88%d8%ac.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: تداولات بورصة البيضاء تنتهي بالأحمر</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن أنهت بورصة الدار البيضاء تداولاتها، اليوم الثلاثاء، على وقع الأحمر ، حيث سجل مؤشرها الرئيسي &#8220;مازي&#8221; خسارة بنسبة 0,53 في المائة، ليستقر بذلك عند 18.983,55 نقطة. من جانبه، سجل مؤشر &#8220;.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: الشابي: هذه أسباب رفضي تدريب آسفي</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن كشف التونسي لسعد الشابي، المدرب السابق لنادي الرجاء الرياضي لكرة القدم، عن الأسباب الحقيقية وراء رفضه عرضًا لتدريب أولمبيك آسفي خلال الفترة المقبلة، خلفًا للإطار الوطني أمين كرمة، الذي انفصل عن الف.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: تصنيف دولي يضع جامعة محمد السادس في المرتبة الأولى بشمال إفريقيا</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن وضع تصنيف مجلة تايمز للتعليم العالي العالمي للجامعات لعام 2026 جامعة محمد السادس متعددة التخصصات التقنية في المرتبة 351–400 عالمياً، باعتبارها الأفضل على الصعيد الوطني، فحجز البلد مكاناً له ضمن &#8.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: الملك يتسلم رسالة من قادة السعودية</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن استقبل الملك محمد السادس، اليوم الثلاثاء بالقصر الملكي بالدار البيضاء، الأمير تركي بن محمد بن فهد بن عبد العزيز آل سعود، وزير الدولة، عضو مجلس الوزراء السعودي، مبعوث الملك سلمان بن عبد العزيز آل سع.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: شائعات سحب تنظيم كأس إفريقيا.. موتسيبي: لا بديل عن المغرب</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن بعد شائعات سحب تنظيم كأس إفريقيا.. رئيس الكاف باتريس موتسيبي يحسم الجدل ويؤكد أن المغرب يظل الخيار الأول والأخير لاستضافة نسخة 2025 The post <a href="https://www.hespress.com/%d8%b4%d8%a7%d8.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: الركراكي يستدعي باش لتعويض أمرابط</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن أعلن الناخب الوطني وليد الركراكي عن استدعاء اللاعب أنس باش للالتحاق بتجمع المنتخب الوطني المغربي، استعدادًا للمباراتين أمام البحرين وديا ثم الكونغو ضمن آخر جولات تصفيات “مونديال 2026”. ويأتي هذا ال.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: أمن بني ملال يفك لغز جثة متفحمة</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن &#160; تمكنت عناصر المصلحة الولائية للشرطة القضائية بولاية أمن بني ملال، مساء أمس الإثنين فاتح شتنبر الجاري، من توقيف شخص يبلغ من العمر 32 سنة، من ذوي السوابق القضائية العديدة، وذلك للاشتباه في تورطه .... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن شاهد :أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة. </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: شبكات سرية تهدد صحة المغاربة بترويج بطاطس مسمومة</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن &#160; كشفت النائبة البرلمانية زينب السيمو أن مدنا مثل طنجة، تطوان، الفنيدق، المضيق، مرتيل والحسمية، تعرف انتشارا كبيرا لشبكات سرية لتوزيع البطاطس المجمدة المعدة للقلي التي تنشط بصمت، في ظل ضعف الرقاب.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: تصنيف أمريكي يضع الجواهري ضمن أفضل محافظي البنوك المركزية</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن &#160; صنفت مجلة &#8220;غلوبال فاينانس&#8221; الأمريكية، والي بنك المغرب، عبد اللطيف الجواهري، ضمن قائمة أفضل محافظي البنوك المركزية في العالم لسنة 2025. ونال السيد الجواهري درجة &#8220;أ&#8221; في ال.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: المدرب عبد السلام وادو يتعرض لحادثة سير خطيرة</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن &#160; تعرض الإطار المغربي عبد السلام وادو، مدرب نادي أورلاندو بايرتس الجنوب إفريقي لكرة القدم، لحادثة سير خطيرة، بمعية خمسة أعضاء من الفريق، في ساعة متأخرة من ليلة الأحد، أثناء عودتهم من مدينة غكبيره.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: وزارة التعليم توضح بشأن اختفاء مدير أكاديمية بني ملال</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن &#160; أعلنت وزارة التربية الوطنية والتعليم الأولي والرياضة، أن مصطفى السليفاني، مدير الأكاديمية الجهوية للتربية والتكوين لجهة بني ملال خنيفرة، تقدّم بطلب الاستفادة من المعاش قبل بلوغ السن القانوني لل.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: بلاغ من المكتب الوطني للسكك الحديدية بشأن الـTGV</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن &#160; باشر المكتب الوطني للسكك الحديدية الأشغال الكبرى للبنية التحتية بجهة الدار البيضاء، في إطار مشروع القطار فائق السرعة القنيطرة – مراكش، بهدف توفير بنية تحتية ملائمة للاحتياجات الحالية والمستقبلي.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: بالفيديو.. أشرف حكيمي يوقف سيارته ليلعب الكرة مع أطفال بالقصر الكبير</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن شاهد :بالفيديو.. أشرف حكيمي يوقف سيارته ليلعب الكرة مع أطفال بالقصر الكبير. </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: هكذا رحّب مرسيليا الفرنسي بانضمام المدافع المغربي أكرد</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن &#160; قلب الدفاع المغربي الدولي نايف أكرد ألوان مرسيليا الفرنسي قادما من وست هام الإنجليزي، حسب ما أعلن النادي المتوسطي الثلاثاء. &#160; &#160; وكتب مرسيليا: “وُلد حيث تشكّل الشمس ظلالها، في القنيطرة.... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
-                <div class="article-card">
-                    <h2 class="article-title">قصة الخبر: “ترامواي” البيضاء يغير مواقيت عمله</h2>
-                    <div class="article-content">في تطور جديد للأحداث، تشير المعلومات إلى أن &#160; &#160; أعلنت شركة ترامواي البيضاء، عن عودتها إلى اعتماد التوقيت الشتوي ابتداء من الأسبوع الجاري، بالنسبة لجميع الخطوط (T1.T2 .T3.T4) والوكالات لتجارية. &#160; &#160; وأوضحت الشركة، أن الوكالات .... </div>
-                    <div class="article-meta">
-                        <span class="writing-style">سردي</span>
-                        <span>2025-10-07</span>
-                    </div>
-                </div>
-            
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">آخر تحديث: الثلاثاء 7 أكتوبر 2025 - 14:30</div>
+            <div class="stat-item">24 خبرًا</div>
+            <div class="stat-item">مصادر موثوقة</div>
         </div>
         
+        <!-- News Grid -->
+        <div class="news-grid">
+            <!-- News Card 1 -->
+            <div class="news-card">
+                <span class="news-category">سياسة</span>
+                <h2 class="news-title">الملك محمد السادس يستقبل مبعوثًا سعوديًا في الدار البيضاء</h2>
+                <p class="news-excerpt">استقبل الملك محمد السادس، اليوم الثلاثاء بالقصر الملكي بالدار البيضاء، الأمير تركي بن محمد بن فهد بن عبد العزيز آل سعود، وزير الدولة، عضو مجلس الوزراء السعودي، مبعوث الملك سلمان بن عبد العزيز آل سعود.</p>
+                <div class="news-meta">
+                    <span class="news-date">2025-10-07 - 12:45</span>
+                    <span>⏱️ 3 دقائق قراءة</span>
+                </div>
+            </div>
+            
+            <!-- News Card 2 -->
+            <div class="news-card">
+                <span class="news-category">اقتصاد</span>
+                <h2 class="news-title">البنك الدولي يرفع توقعات نمو الاقتصاد المغربي إلى 4.4%</h2>
+                <p class="news-excerpt">رفع البنك الدولي توقعاته للنمو في المنطقة التي تشمل الشرق الأوسط وشمال إفريقيا، وجاءت شاملة المغرب بتوقعات محينة لنسبة النمو الاقتصادي المنتظر أن يحقق 4.4% خلال العام الجاري.</p>
+                <div class="news-meta">
+                    <span class="news-date">2025-10-07 - 11:20</span>
+                    <span>⏱️ 4 دقائق قراءة</span>
+                </div>
+            </div>
+            
+            <!-- News Card 3 -->
+            <div class="news-card">
+                <span class="news-category">رياضة</span>
+                <h2 class="news-title">المنتخب الوطني يستعد لمواجهتي البحرين والكونغو</h2>
+                <p class="news-excerpt">أعلن الناخب الوطني وليد الركراكي عن استدعاء اللاعب أنس باش للالتحاق بتجمع المنتخب الوطني المغربي، استعدادًا للمباراتين أمام البحرين وديا ثم الكونغو ضمن آخر جولات تصفيات مونديال 2026.</p>
+                <div class="news-meta">
+                    <span class="news-date">2025-10-07 - 10:15</span>
+                    <span>⏱️ 3 دقائق قراءة</span>
+                </div>
+            </div>
+            
+            <!-- News Card 4 -->
+            <div class="news-card">
+                <span class="news-category">تعليم</span>
+                <h2 class="news-title">جامعة محمد السادس تحتل المرتبة الأولى بشمال إفريقيا</h2>
+                <p class="news-excerpt">وضع تصنيف مجلة تايمز للتعليم العالي العالمي للجامعات لعام 2026 جامعة محمد السادس متعددة التخصصات التقنية في المرتبة 351–400 عالمياً، باعتبارها الأفضل على الصعيد الوطني.</p>
+                <div class="news-meta">
+                    <span class="news-date">2025-10-07 - 09:30</span>
+                    <span>⏱️ 5 دقائق قراءة</span>
+                </div>
+            </div>
+
+            <!-- News Card 5 -->
+            <div class="news-card">
+                <span class="news-category">صحة</span>
+                <h2 class="news-title">وزير الصحة يعلن عن إطلاق الورقة العلاجية الإلكترونية</h2>
+                <p class="news-excerpt">أعلن وزير الصحة والحماية الاجتماعية عن إطلاق الورقة العلاجية الإلكترونية التي ستتيح للمواطنين متابعة حالتهم الصحية وتقليل وقت الانتظار في المستشفيات.</p>
+                <div class="news-meta">
+                    <span class="news-date">2025-10-07 - 08:45</span>
+                    <span>⏱️ 2 دقائق قراءة</span>
+                </div>
+            </div>
+
+            <!-- News Card 6 -->
+            <div class="news-card">
+                <span class="news-category">ثقافة</span>
+                <h2 class="news-title">مهرجان الموسيقى العالمية يعود إلى الرباط الشهر المقبل</h2>
+                <p class="news-excerpt">يعود مهرجان الموسيقى العالمية إلى العاصمة الرباط بمشاركة فنانين من 20 دولة مختلفة، في حدث ثقافي يستمر لمدة أسبوع كامل.</p>
+                <div class="news-meta">
+                    <span class="news-date">2025-10-07 - 16:00</span>
+                    <span>⏱️ 3 دقائق قراءة</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
         <footer class="footer">
-            <p>Morocco Daily News - منصة إخبارية شاملة</p>
-            <p>© 2024 جميع الحقوق محفوظة</p>
+            <div class="footer-logo">المغرب اليوم</div>
+            <p>منصة إخبارية مهنية تقدم آخر الأخبار والتطورات في المملكة المغربية</p>
+            <p>شامل · موثوق · دقيق</p>
+            <p>© 2025 المغرب اليوم - جميع الحقوق محفوظة</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">آخر تحديث: 7 أكتوبر 2025 - 14:30</p>
         </footer>
     </div>
+
+    <script>
+        // Update time automatically
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ar-EG', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false 
+            });
+            const dateString = now.toLocaleDateString('ar-EG', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Update time in stats bar
+            const statItems = document.querySelectorAll('.stat-item');
+            if (statItems[0]) {
+                statItems[0].textContent = `آخر تحديث: ${dateString} - ${timeString}`;
+            }
+            
+            // Update time in footer
+            const footerTime = document.querySelector('.footer p:last-child');
+            if (footerTime) {
+                footerTime.textContent = `آخر تحديث: ${dateString} - ${timeString}`;
+            }
+        }
+        
+        // Update time every minute
+        setInterval(updateTime, 60000);
+        updateTime(); // Initial call
+    </script>
 </body>
 </html>
