@@ -621,34 +621,40 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© <span id="currentYear"></span>© المغرب اليوم - جميع الحقوق محفوظة</p>
+            <p>© <span id="currentYear"></span> المغرب اليوم - جميع الحقوق محفوظة</p>
         </div>
     </footer>
 
     <script>
-        // Update live time
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ar-MA', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                hour12: false 
-            });
-            const dateString = now.toLocaleDateString('ar-MA', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            
-            document.getElementById('liveTime').textContent = `${dateString} - ${timeString}`;
-        }
+    function updateTime() {
+        const now = new Date();
         
-        setInterval(updateTime, 60000);
-        updateTime();
+        // For debugging: check actual hour
+        console.log("Current hour (24h):", now.getHours());
         
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
+        const timeString = now.toLocaleTimeString('ar-MA', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: false, // Ensures 00-23 format
+            timeZone: 'Africa/Casablanca' // Explicitly use Morocco time
+        });
+        
+        const dateString = now.toLocaleDateString('ar-MA', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'Africa/Casablanca'
+        });
+        
+        document.getElementById('liveTime').textContent = `${dateString} - ${timeString}`;
+    }
+    
+    setInterval(updateTime, 60000);
+    updateTime();
+    
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
