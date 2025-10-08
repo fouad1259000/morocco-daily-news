@@ -620,9 +620,9 @@
                 </ul>
             </div>
         </div>
-            <div class="footer-bottom">
-                <p>© <span id="currentYear"></span> المغرب اليوم - جميع الحقوق محفوظة</p>
-             </div>
+        <div class="footer-bottom">
+            <p>© <span id="currentYear"></span>© المغرب اليوم - جميع الحقوق محفوظة</p>
+        </div>
     </footer>
 
     <script>
@@ -642,11 +642,13 @@
             });
             
             document.getElementById('liveTime').textContent = `${dateString} - ${timeString}`;
-             document.getElementById('currentYear').textContent = new Date().getFullYear()`;
         }
         
         setInterval(updateTime, 60000);
         updateTime();
+        
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
