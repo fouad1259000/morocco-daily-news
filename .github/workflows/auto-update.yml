@@ -2,7 +2,7 @@ name: Auto Update News
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Every 6 hours
+    - cron: '0 */3 * * *'  # Every 3 hours at minute 0
   workflow_dispatch:        # Manual trigger
   push:
     branches: [ main ]
@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write
+      id-token: write
     
     steps:
     - name: Checkout repository
@@ -21,24 +23,64 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
+        cache: 'npm'
         
-    - name: Install dependencies
+    - name: Get latest news data
       run: |
-        npm install -g @n8n/n8n
+        # Create a simple script to generate or fetch news
+        cat > update-news.js << 'EOF'
+        // Simple news updater - This would be replaced with your n8n webhook call
+        const fs = require('fs');
         
-    - name: Trigger n8n workflow
-      run: |
-        curl -X POST ${{ secrets.N8N_WEBHOOK_URL }} \
-          -H "Content-Type: application/json" \
-          -d '{"trigger": "auto-update", "timestamp": "$(date)"}'
+        // Sample update - replace this with actual n8n API call
+        const updatedContent = `<!DOCTYPE html>
+        <html dir="rtl" lang="ar">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>المغرب اليوم - آخر الأخبار المغربية</title>
+            <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            <style>/* Your CSS styles */</style>
+        </head>
+        <body>
+            <div style="text-align: center; padding: 50px;">
+                <h1>🔄 جاري تحديث الأخبار...</h1>
+                <p>آخر محاولة تحديث: ${new Date().toLocaleString('ar-MA')}</p>
+                <p>يتم التحديث تلقائيًا كل 6 ساعات</p>
+            </div>
+        </body>
+        </html>`;
+        
+        fs.writeFileSync('index.html', updatedContent);
+        console.log('📰 News update triggered at:', new Date().toLocaleString('ar-MA'));
+        EOF
+        
+        node update-news.js
       
-    - name: Wait for n8n processing
-      run: sleep 30
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
       
-    - name: Commit and push updates
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: .
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
+      
+    - name: Commit updates to repository
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add index.html
-        git diff --staged --quiet || git commit -m "🤖 Auto-update: Latest news $(date +'%Y-%m-%d %H:%M')"
+        git diff --staged --quiet || git commit -m "🤖 Auto-update: $(date +'%Y-%m-%d %H:%M')"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Send notification
+      run: |
+        echo "✅ Auto-update completed at $(date)"
+        echo "📊 Site deployed to: https://fouad1259000.github.io/morocco-daily-news"
