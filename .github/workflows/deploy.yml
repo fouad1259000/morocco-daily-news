@@ -1,0 +1,74 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Allows manual trigger
+  schedule:
+    - cron: '0 */6 * * *'  # Run every 6 hours
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Create index.html from workflow data
+      run: |
+        # Create the main index.html file
+        cat > index.html << 'EOF'
+        <!DOCTYPE html>
+        <html dir="rtl" lang="ar">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>المغرب اليوم - آخر الأخبار المغربية</title>
+            <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            <style>
+                /* Your CSS styles here */
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { font-family: 'Readex Pro', Arial, sans-serif; background: #f8f9fa; line-height: 1.7; color: #333; }
+                /* Add all your CSS styles from previous code */
+            </style>
+        </head>
+        <body>
+            <div id="news-container">
+                <div style="text-align: center; padding: 50px;">
+                    <h1>جاري تحميل الأخبار...</h1>
+                    <p>يتم تحديث المحتوى تلقائيًا كل 6 ساعات</p>
+                </div>
+            </div>
+            
+            <script>
+                // Load news data from data.json
+                fetch('./data.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('news-container').innerHTML = data.html;
+                    })
+                    .catch(error => {
+                        document.getElementById('news-container').innerHTML = `
+                            <div style="text-align: center; padding: 50px;">
+                                <h1>عذرًا، حدث خطأ في تحميل الأخبار</h1>
+                                <p>سيتم التحديث خلال دقائق</p>
+                            </div>
+                        `;
+                    });
+            </script>
+        </body>
+        </html>
+        EOF
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
