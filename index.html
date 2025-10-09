@@ -7,115 +7,771 @@
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         
-        body {
-            font-family: 'Readex Pro', Arial, sans-serif;
-            background: #f8f9fa;
-            line-height: 1.7;
-            color: #333;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .top-header {
-            background: #2c3e50;
-            color: white;
-            padding: 10px 0;
-            border-bottom: 3px solid #e74c3c;
-        }
+body {
+    font-family: 'Readex Pro', Arial, sans-serif;
+    background: #f8f9fa;
+    line-height: 1.7;
+    color: #333;
+}
 
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.top-header {
+    background: #2c3e50;
+    color: white;
+    padding: 10px 0;
+    border-bottom: 3px solid #e74c3c;
+}
 
-        .logo {
-            font-size: 2em;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-        }
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .logo span {
-            color: #e74c3c;
-        }
+.logo {
+    font-size: 2em;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
 
-        .live-time {
-            background: #e74c3c;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9em;
-        }
+.logo span {
+    color: #e74c3c;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-        }
+.live-time {
+    background: #e74c3c;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+}
 
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
+.main-nav {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-        .news-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-        .loading {
-            font-size: 1.2em;
-            color: #666;
-            padding: 50px;
-        }
+.nav-categories {
+    display: flex;
+    list-style: none;
+    gap: 0;
+}
 
-        .update-info {
-            background: #ecf0f1;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 30px;
-            color: #666;
-        }
+.nav-categories li {
+    border-left: 1px solid #eee;
+}
+
+.nav-categories a {
+    display: block;
+    padding: 15px 25px;
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-categories a:hover,
+.nav-categories a.active {
+    background: #e74c3c;
+    color: white;
+}
+
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 40px;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.3em;
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: rgba(255,255,255,0.2);
+    padding: 15px 25px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.news-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.news-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3em;
+}
+
+.news-content {
+    padding: 25px;
+}
+
+.news-category {
+    background: #e74c3c;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.news-title {
+    color: #2c3e50;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.news-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.news-title a:hover {
+    color: #e74c3c;
+}
+
+.news-excerpt {
+    color: #5d6d7e;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #ecf0f1;
+    padding-top: 15px;
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+.news-date {
+    background: #ecf0f1;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+.breaking-news {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.breaking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.breaking-badge {
+    background: rgba(255,255,255,0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9em;
+    white-space: nowrap;
+}
+
+.breaking-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+.sidebar {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.sidebar-section {
+    margin-bottom: 30px;
+}
+
+.sidebar-title {
+    color: #2c3e50;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e74c3c;
+}
+
+.trending-list {
+    list-style: none;
+}
+
+.trending-list li {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.trending-list a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+}
+
+.trending-list a:hover {
+    color: #e74c3c;
+}
+
+.trending-meta {
+    font-size: 0.8em;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+.footer {
+    background: #2c3e50;
+    color: white;
+    padding: 50px 0 20px;
+    margin-top: 50px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footer-section h3 {
+    color: #e74c3c;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #e74c3c;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid #34495e;
+    color: #bdc3c7;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-categories {
+        flex-wrap: wrap;
+    }
+    
+    .nav-categories li {
+        border-left: none;
+        border-bottom: 1px solid #eee;
+        flex: 1 0 50%;
+    }
+    
+    .hero h1 {
+        font-size: 2.2em;
+    }
+    
+    .stats {
+        gap: 15px;
+    }
+    
+    .stat-item {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+}
+
     </style>
 </head>
 <body>
     <header class="top-header">
         <div class="header-container">
             <a href="#" class="logo">المغرب<span>اليوم</span></a>
-            <div class="live-time" id="liveTime">جاري التحميل...</div>
+            <div class="live-time" id="liveTime">الأربعاء 8 أكتوبر 2025 - 01:27</div>
         </div>
     </header>
 
-    <div class="container">
-        <h1>المغرب اليوم</h1>
-        <p>منصة إخبارية شاملة تقدم آخر التطورات في المملكة المغربية</p>
-        
-        <div id="news-container" class="loading">
-            <p>📰 جاري تحميل أحدث الأخبار...</p>
-            <p>سيتم التحديث خلال ثوانٍ</p>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <ul class="nav-categories">
+                <li><a href="#" class="active">الرئيسية</a></li>
+                <li><a href="#">أخبار المغرب</a></li>
+                <li><a href="#">السياسة</a></li>
+                <li><a href="#">الاقتصاد</a></li>
+                <li><a href="#">الرياضة</a></li>
+                <li><a href="#">الثقافة</a></li>
+                <li><a href="#">التكنولوجيا</a></li>
+                <li><a href="#">الصحة</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <div class="update-info">
-            <p>⏰ يتم تحديث الأخبار تلقائيًا كل 6 ساعات</p>
-            <p>🔄 آخر محاولة تحديث: <span id="lastUpdate">جاري التحقق...</span></p>
+    <div class="breaking-news">
+        <div class="breaking-container">
+            <span class="breaking-badge">خبر عاجل</span>
+            <span class="breaking-text">آخر الأخبار المغربية - تحديث مباشر</span>
         </div>
     </div>
 
+    <section class="hero">
+        <div class="hero-container">
+            <h1>المغرب اليوم</h1>
+            <p>منصة إخبارية شاملة تقدم آخر التطورات في المملكة المغربية</p>
+            <div class="stats">
+                <div class="stat-item">📰 16 خبرًا جديدًا</div>
+                <div class="stat-item">🕒 آخر تحديث: 01:27</div>
+                <div class="stat-item">🌍 مصادر موثوقة</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <main class="main-content">
+            <div class="news-grid">
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">الفساد يتربص بالمستقبل</a>
+                        </h2>
+                        <p class="news-excerpt"><p>The post <a href="https://www.hespress.com/%d8%a7%d9%84%d9%81%d8%b3%d8%a7%d8%af-%d9%8a%d8%aa%d8%b1%d8%a8%d8%b5-%d8%a8%d8%a7%d9%84%d9%85%d8%b3%d8%aa%d9%82%d8%a8%d9%84-1637116.html">الفساد يتربص بالم...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">الحكومة تصلح تعامل التجار بالشيكات</a>
+                        </h2>
+                        <p class="news-excerpt"><p>تابعت الحكومة، في مجلسها المنعقد اليوم الخميس برئاسة عزيز أخنوش، عرضا حول &#8220;الاستراتيجية الوطنية للتنمية المستدامة 2035&#8243;، قدمته ليلى بنعلي، وزيرة الانتقال الطاقي والتنمية المستدامة. كما ...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">مستجدات محاكمة ناصيري وبعيوي</a>
+                        </h2>
+                        <p class="news-excerpt"><p>The post <a href="https://www.hespress.com/%d9%85%d8%b3%d8%aa%d8%ac%d8%af%d8%a7%d8%aa-%d9%85%d8%ad%d8%a7%d9%83%d9%85%d8%a9-%d9%86%d8%a7%d8%b5%d9%8a%d8%b1%d9%8a-%d9%88%d8%a8%d8%b9%d9%8a%d9%88%d9%8a-...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">فعاليات مغربية تُشيد بصمود الشعب الفلسطيني و"القوة التفاوضية للمقاومة"</a>
+                        </h2>
+                        <p class="news-excerpt"><p>بعد عامين من حرب غزة، تتجه الآمال صوب اتفاق لوقف إطلاق النار في قطاع غزة والإفراج عن رهائن وأسرى، ينتظر توقيعه الخميس في مصر، ليَضع &#8220;نقطة نهاية&#8221; لحرب مدمرة شدت أنظار الرأي العام العالمي...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">الحكومة والحوار مع "شباب زد"</a>
+                        </h2>
+                        <p class="news-excerpt"><p>The post <a href="https://www.hespress.com/%d8%a7%d9%84%d8%ad%d9%83%d9%88%d9%85%d8%a9-%d9%88%d8%a7%d9%84%d8%ad%d9%88%d8%a7%d8%b1-%d9%85%d8%b9-%d8%b4%d8%a8%d8%a7%d8%a8-%d8%b2%d8%af-1637418.html">الح...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">سعر الفضة يسجل ارتفاعا غير مسبوق</a>
+                        </h2>
+                        <p class="news-excerpt"><p>سجّل سعر أونصة الفضة، يوم الخميس، رقمًا قياسيًا بتجاوزه 50 دولارًا، وذلك للمرة الأولى منذ عام 1993 وبدء وكالة بلومبرغ في إصدار بياناتها، في وقت يتزايد فيه الطلب على القيم الآمنة وسط مخاوف اقتصادية ...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">بايتاس: الحكومة التقطت رسالة شباب "جيل زد".. والحوار يحتاج الطرفين</a>
+                        </h2>
+                        <p class="news-excerpt"><p>بعد تعبيرها الأسبوع الفائت عن تفهمها لمطالب التعبيرات الاحتجاجية لحركة &#8220;جيل زد&#8221; الشبابية واستعدادها للحوار، أكد مصطفى بايتاس، الناطق الرسمي باسم الحكومة الوزير المنتدب المكلف بالعلاقات ...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">الملك يعيّن شفيقي أمينا لمجلس التربية</a>
+                        </h2>
+                        <p class="news-excerpt"><p>أعلن المجلس الأعلى للتربية والتكوين والبحث العلمي أن الملك محمدا السادس تفضّل بتعيين فؤاد شفيقي أمينًا عامًا للمجلس، خلفًا لعزيز قيشوح. وتوجه المجلس سالف الذكر، &#8220;بهذه المناسبة، بخالص عبارات ا...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">"الأحمر" يختم تداولات بورصة البيضاء</a>
+                        </h2>
+                        <p class="news-excerpt"><p>أنهت بورصة الدار البيضاء تداولاتها، اليوم الخميس، على وقع الانخفاض، حيث سجل مؤشرها الرئيسي &#8220;مازي&#8221; تراجعا بنسبة 1,4 في المائة، ليستقر بذلك عند 18.599,49 نقطة. من جانبه، سجل مؤشر &#8220;M...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">أبو دقة "بطل حرية الصحافة العالمية"</a>
+                        </h2>
+                        <p class="news-excerpt"><p>كرم المعهد الدولي للصحافة مريم أبو دقة، صحفية فلسطينية مراسلة إندبندنت عربية في قطاع غزة، بمنحها جائزة &#8220;بطل حرية الصحافة العالمية&#8221; تقديرا لتضحياتها في تغطية الحرب في قطاع غزة، حيث قتلت ...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">لجنة وزارية تحل بمستشفى أكادير.. ونقابات الصحة ترفض "التضحية بالزملاء"</a>
+                        </h2>
+                        <p class="news-excerpt"><p>عقب تسجيل وفاة جديدة لامرأة حامل بمستشفى الحسن الثاني بأكادير، علمت هسبريس، من مصادر مطلعة، أن وزارة الصحة والحماية الاجتماعية أوفدت، اليوم الخميس، لجنة مركزية إلى المستشفى، من بين أعضائها عادل زني...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">بنعلي تعين مديرا جهويا جديداً بوجدة</a>
+                        </h2>
+                        <p class="news-excerpt"><p>علمت جريدة هسبريس من مصادر رسمية جيدة الاطلاع أن ليلى بنعلي، وزيرة الانتقال الطاقي والتنمية المستدامة، قررت أمس الأربعاء تعيين محمد اغزاف مديرا جهويا لقطاع الانتقال الطاقي بوجدة، وذلك خلفاً لعبد ال...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">أخبار</span>
+                        <h2 class="news-title">
+                            <a href="#">أخبار المغرب: أمن بني ملال يفك لغز جثة متفحمة</a>
+                        </h2>
+                        <p class="news-excerpt">&#160; تمكنت عناصر المصلحة الولائية للشرطة القضائية بولاية أمن بني ملال، مساء أمس الإثنين فاتح شتنبر الجاري، من توقيف شخص يبلغ من العمر 32 سنة، من ذوي السوابق القضائية العديدة، وذل...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">سياسة</span>
+                        <h2 class="news-title">
+                            <a href="#">أخبار المغرب: أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة</a>
+                        </h2>
+                        <p class="news-excerpt"> شاهد :أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">مجتمع</span>
+                        <h2 class="news-title">
+                            <a href="#">أخبار المغرب: شبكات سرية تهدد صحة المغاربة بترويج بطاطس مسمومة</a>
+                        </h2>
+                        <p class="news-excerpt">&#160; كشفت النائبة البرلمانية زينب السيمو أن مدنا مثل طنجة، تطوان، الفنيدق، المضيق، مرتيل والحسمية، تعرف انتشارا كبيرا لشبكات سرية لتوزيع البطاطس المجمدة المعدة للقلي التي تنشط بص...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">اقتصاد</span>
+                        <h2 class="news-title">
+                            <a href="#">أخبار المغرب: تصنيف أمريكي يضع الجواهري ضمن أفضل محافظي البنوك المركزية</a>
+                        </h2>
+                        <p class="news-excerpt">&#160; صنفت مجلة &#8220;غلوبال فاينانس&#8221; الأمريكية، والي بنك المغرب، عبد اللطيف الجواهري، ضمن قائمة أفضل محافظي البنوك المركزية في العالم لسنة 2025. ونال السيد الجواهري درجة &...</p>
+                        <div class="news-meta">
+                            <span class="news-date">2025-10-09 - 01:27</span>
+                            <span>⏱️ 3 دقائق قراءة</span>
+                        </div>
+                    </div>
+                </article>
+                
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">الأكثر قراءة</h3>
+                <ul class="trending-list">
+                    
+                    <li>
+                        <a href="#">الفساد يتربص بالمستقبل</a>
+                        <div class="trending-meta">2025-10-09 - 01:27</div>
+                    </li>
+                    
+                    <li>
+                        <a href="#">الحكومة تصلح تعامل التجار بالشيكات</a>
+                        <div class="trending-meta">2025-10-09 - 01:27</div>
+                    </li>
+                    
+                    <li>
+                        <a href="#">مستجدات محاكمة ناصيري وبعيوي</a>
+                        <div class="trending-meta">2025-10-09 - 01:27</div>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">الفئات</h3>
+                <ul class="footer-links">
+                    <li><a href="#">أخبار المغرب</a></li>
+                    <li><a href="#">السياسة</a></li>
+                    <li><a href="#">الاقتصاد</a></li>
+                    <li><a href="#">الرياضة</a></li>
+                    <li><a href="#">الثقافة</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>المغرب اليوم</h3>
+                <p>منصة إخبارية مهنية تقدم آخر الأخبار والتطورات في المملكة المغربية بشفافية ومهنية.</p>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">عن المغرب اليوم</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>الفئات</h3>
+                <ul class="footer-links">
+                    <li><a href="#">أخبار المغرب</a></li>
+                    <li><a href="#">السياسة</a></li>
+                    <li><a href="#">الاقتصاد</a></li>
+                    <li><a href="#">الرياضة</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 المغرب اليوم - جميع الحقوق محفوظة | آخر تحديث: <span id="footerTime">الأربعاء 8 أكتوبر 2025 - 01:27</span></p>
+        </div>
+    </footer>
+
     <script>
-        // Update live time
         function updateTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('ar-MA', { 
@@ -134,39 +790,16 @@
             
             const dateString = `${weekday} ${day} ${month} ${year}`;
             
-            document.getElementById('liveTime').textContent = `${dateString} - ${timeString}`;
-            document.getElementById('lastUpdate').textContent = `${dateString} - ${timeString}`;
+            if (document.getElementById('liveTime')) {
+                document.getElementById('liveTime').textContent = `${dateString} - ${timeString}`;
+            }
+            if (document.getElementById('footerTime')) {
+                document.getElementById('footerTime').textContent = `${dateString} - ${timeString}`;
+            }
         }
-
-        // Simulate news loading (replace with your n8n content)
-        function loadNews() {
-            setTimeout(() => {
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = `
-                    <div class="news-grid">
-                        <div class="news-card">
-                            <h3>🚀 الموقع قيد التطوير</h3>
-                            <p>نعمل على تحديث الموقع بأحدث الأخبار المغربية تلقائيًا.</p>
-                            <p>سيتم تحميل الأخبار الحقيقية قريبًا من خلال نظام n8n الآلي.</p>
-                        </div>
-                        <div class="news-card">
-                            <h3>📊 نظام التحديث التلقائي</h3>
-                            <p>يعمل النظام على جمع الأخبار من مصادر متعددة وتحديث الموقع كل 6 ساعات.</p>
-                        </div>
-                        <div class="news-card">
-                            <h3>🕒 آخر تحديث</h3>
-                            <p>يتم تحديث المحتوى: ${new Date().toLocaleString('ar-MA')}</p>
-                            <p>عدد الأخبار: 16 خبرًا متوقعًا</p>
-                        </div>
-                    </div>
-                `;
-            }, 2000);
-        }
-
-        // Initialize
-        updateTime();
+        
         setInterval(updateTime, 60000);
-        loadNews();
+        updateTime();
     </script>
 </body>
 </html>
