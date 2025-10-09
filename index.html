@@ -55,331 +55,39 @@
             font-size: 0.9em;
         }
 
-        .main-nav {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .nav-categories {
-            display: flex;
-            list-style: none;
-            gap: 0;
-        }
-
-        .nav-categories li {
-            border-left: 1px solid #eee;
-        }
-
-        .nav-categories a {
-            display: block;
-            padding: 15px 25px;
-            text-decoration: none;
-            color: #2c3e50;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .nav-categories a:hover,
-        .nav-categories a.active {
-            background: #e74c3c;
-            color: white;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 0;
-            margin-bottom: 40px;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3em;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            font-size: 1.3em;
-            opacity: 0.9;
-            margin-bottom: 25px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            background: rgba(255,255,255,0.2);
-            padding: 15px 25px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px 40px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
+            padding: 40px 20px;
+            text-align: center;
         }
 
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
-            margin-bottom: 40px;
+            margin: 40px 0;
         }
 
         .news-card {
             background: white;
             border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .news-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3em;
-        }
-
-        .news-content {
-            padding: 25px;
-        }
-
-        .news-category {
-            background: #e74c3c;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .news-title {
-            color: #2c3e50;
-            font-size: 1.3em;
-            font-weight: 600;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-
-        .news-title a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .news-title a:hover {
-            color: #e74c3c;
-        }
-
-        .news-excerpt {
-            color: #5d6d7e;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .news-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #ecf0f1;
-            padding-top: 15px;
-            color: #7f8c8d;
-            font-size: 0.9em;
-        }
-
-        .news-date {
-            background: #ecf0f1;
-            padding: 4px 10px;
-            border-radius: 12px;
-        }
-
-        .breaking-news {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 15px 0;
-            margin-bottom: 30px;
-        }
-
-        .breaking-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .breaking-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9em;
-            white-space: nowrap;
-        }
-
-        .breaking-text {
-            flex: 1;
-            font-weight: 500;
-        }
-
-        .sidebar {
-            background: white;
-            border-radius: 15px;
             padding: 25px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .sidebar-section {
-            margin-bottom: 30px;
-        }
-
-        .sidebar-title {
-            color: #2c3e50;
+        .loading {
             font-size: 1.2em;
-            font-weight: 600;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e74c3c;
+            color: #666;
+            padding: 50px;
         }
 
-        .trending-list {
-            list-style: none;
-        }
-
-        .trending-list li {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-
-        .trending-list a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: 500;
-            display: block;
-        }
-
-        .trending-list a:hover {
-            color: #e74c3c;
-        }
-
-        .trending-meta {
-            font-size: 0.8em;
-            color: #7f8c8d;
-            margin-top: 5px;
-        }
-
-        .footer {
-            background: #2c3e50;
-            color: white;
-            padding: 50px 0 20px;
-            margin-top: 50px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .footer-section h3 {
-            color: #e74c3c;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: #e74c3c;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
+        .update-info {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 10px;
             margin-top: 30px;
-            border-top: 1px solid #34495e;
-            color: #bdc3c7;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-categories {
-                flex-wrap: wrap;
-            }
-            
-            .nav-categories li {
-                border-left: none;
-                border-bottom: 1px solid #eee;
-                flex: 1 0 50%;
-            }
-            
-            .hero h1 {
-                font-size: 2.2em;
-            }
-            
-            .stats {
-                gap: 15px;
-            }
-            
-            .stat-item {
-                padding: 10px 15px;
-                font-size: 0.9em;
-            }
+            color: #666;
         }
     </style>
 </head>
@@ -387,389 +95,27 @@
     <header class="top-header">
         <div class="header-container">
             <a href="#" class="logo">المغرب<span>اليوم</span></a>
-            <div class="live-time" id="liveTime">الأربعاء 8 أكتوبر 2025 - 01:27</div>
+            <div class="live-time" id="liveTime">جاري التحميل...</div>
         </div>
     </header>
 
-    <nav class="main-nav">
-        <div class="nav-container">
-            <ul class="nav-categories">
-                <li><a href="#" class="active">الرئيسية</a></li>
-                <li><a href="#">أخبار المغرب</a></li>
-                <li><a href="#">السياسة</a></li>
-                <li><a href="#">الاقتصاد</a></li>
-                <li><a href="#">الرياضة</a></li>
-                <li><a href="#">الثقافة</a></li>
-                <li><a href="#">التكنولوجيا</a></li>
-                <li><a href="#">الصحة</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="breaking-news">
-        <div class="breaking-container">
-            <span class="breaking-badge">خبر عاجل</span>
-            <span class="breaking-text">آخر الأخبار المغربية - تحديث مباشر</span>
-        </div>
-    </div>
-
-    <section class="hero">
-        <div class="hero-container">
-            <h1>المغرب اليوم</h1>
-            <p>منصة إخبارية شاملة تقدم آخر التطورات في المملكة المغربية</p>
-            <div class="stats">
-                <div class="stat-item">📰 16 خبرًا جديدًا</div>
-                <div class="stat-item">🕒 آخر تحديث: 01:27</div>
-                <div class="stat-item">🌍 مصادر موثوقة</div>
-            </div>
-        </div>
-    </section>
-
     <div class="container">
-        <main class="main-content">
-            <div class="news-grid">
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">تحليل: undefined</a>
-                        </h2>
-                        <p class="news-excerpt">من منظور تحليلي، تشير المعطيات إلى أن لا يوجد محتوى متاح. هذا التطور يحمل في طياته عدة دلالات تستحق الدراسة والتمحيص من قبل المختصين في المجال.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 01:27</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                    
-            </div>
-        </main>
+        <h1>المغرب اليوم</h1>
+        <p>منصة إخبارية شاملة تقدم آخر التطورات في المملكة المغربية</p>
+        
+        <div id="news-container" class="loading">
+            <p>📰 جاري تحميل أحدث الأخبار...</p>
+            <p>سيتم التحديث خلال ثوانٍ</p>
+        </div>
 
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">الأكثر قراءة</h3>
-                <ul class="trending-list">
-                    
-                    <li>
-                        <a href="#">تحليل: undefined</a>
-                        <div class="trending-meta">2025-10-08 - 01:27</div>
-                    </li>
-                        
-                    <li>
-                        <a href="#">تحليل: undefined</a>
-                        <div class="trending-meta">2025-10-08 - 01:27</div>
-                    </li>
-                        
-                    <li>
-                        <a href="#">تحليل: undefined</a>
-                        <div class="trending-meta">2025-10-08 - 01:27</div>
-                    </li>
-                        
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">الفئات</h3>
-                <ul class="footer-links">
-                    <li><a href="#">أخبار المغرب</a></li>
-                    <li><a href="#">السياسة</a></li>
-                    <li><a href="#">الاقتصاد</a></li>
-                    <li><a href="#">الرياضة</a></li>
-                    <li><a href="#">الثقافة</a></li>
-                </ul>
-            </div>
-        </aside>
+        <div class="update-info">
+            <p>⏰ يتم تحديث الأخبار تلقائيًا كل 6 ساعات</p>
+            <p>🔄 آخر محاولة تحديث: <span id="lastUpdate">جاري التحقق...</span></p>
+        </div>
     </div>
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>المغرب اليوم</h3>
-                <p>منصة إخبارية مهنية تقدم آخر الأخبار والتطورات في المملكة المغربية بشفافية ومهنية.</p>
-            </div>
-            <div class="footer-section">
-                <h3>روابط سريعة</h3>
-                <ul class="footer-links">
-                    <li><a href="#">الرئيسية</a></li>
-                    <li><a href="#">عن المغرب اليوم</a></li>
-                    <li><a href="#">اتصل بنا</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>الفئات</h3>
-                <ul class="footer-links">
-                    <li><a href="#">أخبار المغرب</a></li>
-                    <li><a href="#">السياسة</a></li>
-                    <li><a href="#">الاقتصاد</a></li>
-                    <li><a href="#">الرياضة</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 المغرب اليوم - جميع الحقوق محفوظة | آخر تحديث: <span id="footerTime">الأربعاء 8 أكتوبر 2025 - 01:27</span></p>
-        </div>
-    </footer>
 
     <script>
+        // Update live time
         function updateTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('ar-MA', { 
@@ -789,11 +135,38 @@
             const dateString = `${weekday} ${day} ${month} ${year}`;
             
             document.getElementById('liveTime').textContent = `${dateString} - ${timeString}`;
-            document.getElementById('footerTime').textContent = `${dateString} - ${timeString}`;
+            document.getElementById('lastUpdate').textContent = `${dateString} - ${timeString}`;
         }
-        
-        setInterval(updateTime, 60000);
+
+        // Simulate news loading (replace with your n8n content)
+        function loadNews() {
+            setTimeout(() => {
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = `
+                    <div class="news-grid">
+                        <div class="news-card">
+                            <h3>🚀 الموقع قيد التطوير</h3>
+                            <p>نعمل على تحديث الموقع بأحدث الأخبار المغربية تلقائيًا.</p>
+                            <p>سيتم تحميل الأخبار الحقيقية قريبًا من خلال نظام n8n الآلي.</p>
+                        </div>
+                        <div class="news-card">
+                            <h3>📊 نظام التحديث التلقائي</h3>
+                            <p>يعمل النظام على جمع الأخبار من مصادر متعددة وتحديث الموقع كل 6 ساعات.</p>
+                        </div>
+                        <div class="news-card">
+                            <h3>🕒 آخر تحديث</h3>
+                            <p>يتم تحديث المحتوى: ${new Date().toLocaleString('ar-MA')}</p>
+                            <p>عدد الأخبار: 16 خبرًا متوقعًا</p>
+                        </div>
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        // Initialize
         updateTime();
+        setInterval(updateTime, 60000);
+        loadNews();
     </script>
 </body>
 </html>
