@@ -1,0 +1,44 @@
+name: Auto Update News
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:        # Manual trigger
+  push:
+    branches: [ main ]
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm install -g @n8n/n8n
+        
+    - name: Trigger n8n workflow
+      run: |
+        curl -X POST ${{ secrets.N8N_WEBHOOK_URL }} \
+          -H "Content-Type: application/json" \
+          -d '{"trigger": "auto-update", "timestamp": "$(date)"}'
+      
+    - name: Wait for n8n processing
+      run: sleep 30
+      
+    - name: Commit and push updates
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add index.html
+        git diff --staged --quiet || git commit -m "🤖 Auto-update: Latest news $(date +'%Y-%m-%d %H:%M')"
+        git push
