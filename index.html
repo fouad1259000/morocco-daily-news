@@ -156,11 +156,17 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
         }
 
         .news-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-decoration: none;
+            color: inherit;
         }
 
         .news-image {
@@ -178,6 +184,14 @@
             padding: 25px;
         }
 
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
         .news-category {
             background: #e74c3c;
             color: white;
@@ -186,7 +200,16 @@
             font-size: 0.8em;
             font-weight: 600;
             display: inline-block;
-            margin-bottom: 15px;
+        }
+
+        .news-source {
+            background: #3498db;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 500;
+            display: inline-block;
         }
 
         .news-title {
@@ -195,15 +218,6 @@
             font-weight: 600;
             margin-bottom: 15px;
             line-height: 1.4;
-        }
-
-        .news-title a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .news-title a:hover {
-            color: #e74c3c;
         }
 
         .news-excerpt {
@@ -282,27 +296,40 @@
             list-style: none;
         }
 
-        .trending-list li {
+        .trending-item {
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid #ecf0f1;
         }
 
-        .trending-list a {
+        .trending-link {
             color: #2c3e50;
             text-decoration: none;
             font-weight: 500;
             display: block;
+            transition: color 0.3s ease;
         }
 
-        .trending-list a:hover {
+        .trending-link:hover {
             color: #e74c3c;
+            text-decoration: none;
         }
 
         .trending-meta {
             font-size: 0.8em;
             color: #7f8c8d;
             margin-top: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trending-source {
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
         }
 
         .footer {
@@ -353,6 +380,54 @@
             color: #bdc3c7;
         }
 
+        /* Article Page Styles */
+        .article-page {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .article-header {
+            margin-bottom: 30px;
+        }
+
+        .article-title {
+            color: #2c3e50;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .article-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+
+        .back-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            font-size: 1em;
+        }
+
+        .back-button:hover {
+            background: #2980b9;
+        }
+
         @media (max-width: 768px) {
             .container {
                 grid-template-columns: 1fr;
@@ -380,498 +455,644 @@
                 padding: 10px 15px;
                 font-size: 0.9em;
             }
+            
+            .news-header {
+                flex-direction: column;
+                gap: 8px;
+            }
         }
     </style>
 </head>
 <body>
-    <header class="top-header">
-        <div class="header-container">
-            <a href="#" class="logo">المغرب<span>اليوم</span></a>
-            <div class="live-time" id="liveTime">الأربعاء 8 أكتوبر 2025 - 01:27</div>
-        </div>
-    </header>
+    <!-- Main News Grid -->
+    <div id="main-site">
+        <header class="top-header">
+            <div class="header-container">
+                <a href="#" class="logo">المغرب<span>اليوم</span></a>
+                <div class="live-time" id="liveTime">جاري التحميل...</div>
+            </div>
+        </header>
 
-    <nav class="main-nav">
-        <div class="nav-container">
-            <ul class="nav-categories">
-                <li><a href="#" class="active">الرئيسية</a></li>
-                <li><a href="#">أخبار المغرب</a></li>
-                <li><a href="#">السياسة</a></li>
-                <li><a href="#">الاقتصاد</a></li>
-                <li><a href="#">الرياضة</a></li>
-                <li><a href="#">الثقافة</a></li>
-                <li><a href="#">التكنولوجيا</a></li>
-                <li><a href="#">الصحة</a></li>
-            </ul>
-        </div>
-    </nav>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="nav-categories">
+                    <li><a href="#" class="active">الرئيسية</a></li>
+                    <li><a href="#" data-category="أخبار">أخبار المغرب</a></li>
+                    <li><a href="#" data-category="سياسة">السياسة</a></li>
+                    <li><a href="#" data-category="اقتصاد">الاقتصاد</a></li>
+                    <li><a href="#" data-category="رياضة">الرياضة</a></li>
+                    <li><a href="#" data-category="ثقافة">الثقافة</a></li>
+                    <li><a href="#" data-category="تكنولوجيا">التكنولوجيا</a></li>
+                    <li><a href="#" data-category="صحة">الصحة</a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <div class="breaking-news">
-        <div class="breaking-container">
-            <span class="breaking-badge">خبر عاجل</span>
-            <span class="breaking-text">آخر الأخبار المغربية - تحديث مباشر</span>
+        <div class="breaking-news">
+            <div class="breaking-container">
+                <span class="breaking-badge">خبر عاجل</span>
+                <span class="breaking-text">آخر الأخبار المغربية - 16 خبر جديد</span>
+            </div>
         </div>
+
+        <section class="hero">
+            <div class="hero-container">
+                <h1>المغرب اليوم</h1>
+                <p>منصة إخبارية شاملة تقدم آخر التطورات في المملكة المغربية</p>
+                <div class="stats">
+                    <div class="stat-item">📰 16 خبرًا جديدًا</div>
+                    <div class="stat-item">🕒 آخر تحديث: <span id="updateTime">جاري التحديث</span></div>
+                    <div class="stat-item">🌍 مصادر موثوقة</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <main class="main-content">
+                <div class="news-grid" id="newsGrid">
+                    
+                    <a href="#article-1" class="news-card" data-article-id="article-1">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">أخبار</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">المغاربة يترقبون أول خطاب للملك محمد السادس بعد احتجاجات "جيل زد"</h2>
+                            <p class="news-excerpt">تتجه أنظار المغاربة بمختلف فئاتهم الاجتماعية، غدا الجمعة، صوب الخطاب المرتقب للملك محمد السادس في افتتاح السنة التشريعية الخامسة من الولاية التشريعية الحادية عشرة بمقر البرلمان، وس...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-2" class="news-card" data-article-id="article-2">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">سياسة</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">من يتحدث باسم "جيل زد"؟ .. النخبة والشباب والمغرب الذي نريد</h2>
+                            <p class="news-excerpt">&#8220;جيل Z &#8221; لا يطلب من أحد أن يتكلم باسمه؛ بل أن يتوقف عن الكلام باسمه. بهذه العبارة يمكن اختصار المأزق الحقيقي الذي فجّرته الرسالة المفتوحة الصادرة مؤخرًا بعنوانٍ صريح: “...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-3" class="news-card" data-article-id="article-3">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">اقتصاد</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">تشكيلة "الأسود" للقاء البحرين وديا</h2>
+                            <p class="news-excerpt">كشف الناخب الوطني وليد الركراكي مدرب المنتخب المغربي لكرة القدم، عن التشكيلة التي ستواجه منتخب البحرين وديا، على أرضية ملعب المجمع الرياضي الأمير مولاي عبد الله بمدينة الرباط، في ا...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-4" class="news-card" data-article-id="article-4">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">مجتمع</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">الجزائر تتأهل رسميا إلى كأس العالم</h2>
+                            <p class="news-excerpt">وضع منتخب الجزائر حدا لسوء الحظ الذي لازمه في التأهل لنهائيات كأس العالم لكرة القدم، وصعد أخيرا للنسخة المقبلة لـ”المونديال” بعد غياب 12 عاما. وحقق منتخب الجزائر فوزا سهلا 3 / صفر ...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-5" class="news-card" data-article-id="article-5">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">أخبار</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">السيسي: ترامب يستحق جائزة نوبل</h2>
+                            <p class="news-excerpt">أكد الرئيس المصري عبد الفتاح السيسي لنظيره الأمريكي دونالد ترامب في اتصال هاتفي، الخميس، بأنه يستحق &#8220;عن جدارة&#8221; جائزة نوبل للسلام عن دوره في التوصل إلى اتفاق وقف إطلاق ا...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-6" class="news-card" data-article-id="article-6">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">سياسة</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">الأميرة للا حسناء تحضر مؤتمرا بأبوظبي</h2>
+                            <p class="news-excerpt">شاركت الأميرة للا حسناء، رئيسة مؤسسة محمد السادس لحماية البيئة، اليوم الخميس بأبوظبي، في حفل استقبال أقيم على شرف كبار الشخصيات المشاركين في &#8220;المؤتمر العالمي للحفاظ على الطبي...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-7" class="news-card" data-article-id="article-7">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">اقتصاد</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">إطلاق برنامج دعم جمعيات الشباب</h2>
+                            <p class="news-excerpt">أعلنت وزارة الشباب والثقافة والتواصل إطلاق برنامج دعم جمعيات الشباب برسم سنة 2025، الذي سيتم تنزيله على الصعيد الجهوي، مُحددة سقف الدعم المالي المخصص لكل مشروع في 10 آلاف درهم. وأف...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-8" class="news-card" data-article-id="article-8">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">مجتمع</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">تقرير: المغرب يشهد صفقات اندماج واستحواذ بقيمة 46 مليار سنتيم</h2>
+                            <p class="news-excerpt">كشف تقرير حديث للموقع المتخصص &#8220;Dealmakersafrica&#8221; عن بلوغ القيمة الإجمالية للصفقات الاستثمارية المتعلّقة بالاندماج والاستحواذ في المغرب، خلال النصف الأول من السنة الجاري...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-9" class="news-card" data-article-id="article-9">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">أخبار</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">الفساد يتربص بالمستقبل</h2>
+                            <p class="news-excerpt">The post الفساد يتربص بالمستقبل appeared first on Hespress - هسبريس جريدة إلكترونية مغربية.</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-10" class="news-card" data-article-id="article-10">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">سياسة</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">الحكومة تصلح تعامل التجار بالشيكات</h2>
+                            <p class="news-excerpt">تابعت الحكومة، في مجلسها المنعقد اليوم الخميس برئاسة عزيز أخنوش، عرضا حول &#8220;الاستراتيجية الوطنية للتنمية المستدامة 2035&#8243;، قدمته ليلى بنعلي، وزيرة الانتقال الطاقي والتنمي...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-11" class="news-card" data-article-id="article-11">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">اقتصاد</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">مستجدات محاكمة ناصيري وبعيوي</h2>
+                            <p class="news-excerpt">The post مستجدات محاكمة ناصيري وبعيوي appeared first on Hespress - هسبريس جريدة إلكترونية مغربية.</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-12" class="news-card" data-article-id="article-12">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">مجتمع</span>
+                                <span class="news-source">Hespress</span>
+                            </div>
+                            <h2 class="news-title">فعاليات مغربية تُشيد بصمود الشعب الفلسطيني و"القوة التفاوضية للمقاومة"</h2>
+                            <p class="news-excerpt">بعد عامين من حرب غزة، تتجه الآمال صوب اتفاق لوقف إطلاق النار في قطاع غزة والإفراج عن رهائن وأسرى، ينتظر توقيعه الخميس في مصر، ليَضع &#8220;نقطة نهاية&#8221; لحرب مدمرة شدت أنظار ال...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-13" class="news-card" data-article-id="article-13">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">أخبار</span>
+                                <span class="news-source">Alayam24</span>
+                            </div>
+                            <h2 class="news-title">أخبار المغرب: أمن بني ملال يفك لغز جثة متفحمة</h2>
+                            <p class="news-excerpt">&#160; تمكنت عناصر المصلحة الولائية للشرطة القضائية بولاية أمن بني ملال، مساء أمس الإثنين فاتح شتنبر الجاري، من توقيف شخص يبلغ من العمر 32 سنة، من ذوي السوابق القضائية ال...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-14" class="news-card" data-article-id="article-14">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">مجتمع</span>
+                                <span class="news-source">Alayam24</span>
+                            </div>
+                            <h2 class="news-title">أخبار المغرب: أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة</h2>
+                            <p class="news-excerpt">شاهد :أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-15" class="news-card" data-article-id="article-15">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">تكنولوجيا</span>
+                                <span class="news-source">Alayam24</span>
+                            </div>
+                            <h2 class="news-title">أخبار المغرب: شبكات سرية تهدد صحة المغاربة بترويج بطاطس مسمومة</h2>
+                            <p class="news-excerpt">&#160; كشفت النائبة البرلمانية زينب السيمو أن مدنا مثل طنجة، تطوان، الفنيدق، المضيق، مرتيل والحسمية، تعرف انتشارا كبيرا لشبكات سرية لتوزيع البطاطس المجمدة المعدة للقلي ال...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#article-16" class="news-card" data-article-id="article-16">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-header">
+                                <span class="news-category">ثقافة</span>
+                                <span class="news-source">Alayam24</span>
+                            </div>
+                            <h2 class="news-title">أخبار المغرب: تصنيف أمريكي يضع الجواهري ضمن أفضل محافظي البنوك المركزية</h2>
+                            <p class="news-excerpt">&#160; صنفت مجلة &#8220;غلوبال فاينانس&#8221; الأمريكية، والي بنك المغرب، عبد اللطيف الجواهري، ضمن قائمة أفضل محافظي البنوك المركزية في العالم لسنة 2025. ونال السيد الجوا...</p>
+                            <div class="news-meta">
+                                <span class="news-date">2025-10-09 - 19:07</span>
+                                <span>3 دقائق قراءة</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                </div>
+            </main>
+
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">الأكثر قراءة</h3>
+                    <ul class="trending-list">
+                        
+                        <li class="trending-item">
+                            <a href="#article-1" class="trending-link" data-article-id="article-1">
+                                المغاربة يترقبون أول خطاب للملك محمد السادس بعد احتجاجات "جيل زد"
+                            </a>
+                            <div class="trending-meta">
+                                <span>2025-10-09</span>
+                                <span class="trending-source">Hespress</span>
+                            </div>
+                        </li>
+                        
+                        <li class="trending-item">
+                            <a href="#article-2" class="trending-link" data-article-id="article-2">
+                                من يتحدث باسم "جيل زد"؟ .. النخبة والشباب والمغرب الذي نريد
+                            </a>
+                            <div class="trending-meta">
+                                <span>2025-10-09</span>
+                                <span class="trending-source">Hespress</span>
+                            </div>
+                        </li>
+                        
+                        <li class="trending-item">
+                            <a href="#article-3" class="trending-link" data-article-id="article-3">
+                                تشكيلة "الأسود" للقاء البحرين وديا
+                            </a>
+                            <div class="trending-meta">
+                                <span>2025-10-09</span>
+                                <span class="trending-source">Hespress</span>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">الفئات</h3>
+                    <ul class="footer-links" id="categoryLinks">
+                        <li><a href="#" data-category="أخبار">أخبار المغرب</a></li>
+                        <li><a href="#" data-category="سياسة">السياسة</a></li>
+                        <li><a href="#" data-category="اقتصاد">الاقتصاد</a></li>
+                        <li><a href="#" data-category="رياضة">الرياضة</a></li>
+                        <li><a href="#" data-category="ثقافة">الثقافة</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>المغرب اليوم</h3>
+                    <p>منصة إخبارية مهنية تقدم آخر الأخبار والتطورات في المملكة المغربية بشفافية ومهنية.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#">عن المغرب اليوم</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>الفئات</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-category="أخبار">أخبار المغرب</a></li>
+                        <li><a href="#" data-category="سياسة">السياسة</a></li>
+                        <li><a href="#" data-category="اقتصاد">الاقتصاد</a></li>
+                        <li><a href="#" data-category="رياضة">الرياضة</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 المغرب اليوم - جميع الحقوق محفوظة | آخر تحديث: <span id="footerTime">جاري التحديث</span></p>
+            </div>
+        </footer>
     </div>
 
-    <section class="hero">
-        <div class="hero-container">
-            <h1>المغرب اليوم</h1>
-            <p>منصة إخبارية شاملة تقدم آخر التطورات في المملكة المغربية</p>
-            <div class="stats">
-                <div class="stat-item">📰 22 خبرًا جديدًا</div>
-                <div class="stat-item">🕒 آخر تحديث: 01:27</div>
-                <div class="stat-item">🌍 مصادر موثوقة</div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <main class="main-content">
-            <div class="news-grid">
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">السيسي: ترامب يستحق جائزة نوبل</a>
-                        </h2>
-                        <p class="news-excerpt">أكد الرئيس المصري عبد الفتاح السيسي لنظيره الأمريكي دونالد ترامب في اتصال هاتفي، الخميس، بأنه يستحق &#8220;عن جدارة&#8221; جائزة نوبل للسلام عن دوره في التوصل إلى اتفاق وقف إطلاق ا...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">سياسة</span>
-                        <h2 class="news-title">
-                            <a href="#">الأميرة للا حسناء تحضر مؤتمرا بأبوظبي</a>
-                        </h2>
-                        <p class="news-excerpt">شاركت الأميرة للا حسناء، رئيسة مؤسسة محمد السادس لحماية البيئة، اليوم الخميس بأبوظبي، في حفل استقبال أقيم على شرف كبار الشخصيات المشاركين في &#8220;المؤتمر العالمي للحفاظ على الطبي...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">اقتصاد</span>
-                        <h2 class="news-title">
-                            <a href="#">إطلاق برنامج دعم جمعيات الشباب</a>
-                        </h2>
-                        <p class="news-excerpt">أعلنت وزارة الشباب والثقافة والتواصل إطلاق برنامج دعم جمعيات الشباب برسم سنة 2025، الذي سيتم تنزيله على الصعيد الجهوي، مُحددة سقف الدعم المالي المخصص لكل مشروع في 10 آلاف درهم. وأف...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">اقتصاد</span>
-                        <h2 class="news-title">
-                            <a href="#">تقرير: المغرب يشهد صفقات اندماج واستحواذ بقيمة 46 مليار سنتيم</a>
-                        </h2>
-                        <p class="news-excerpt">كشف تقرير حديث للموقع المتخصص &#8220;Dealmakersafrica&#8221; عن بلوغ القيمة الإجمالية للصفقات الاستثمارية المتعلّقة بالاندماج والاستحواذ في المغرب، خلال النصف الأول من السنة الجاري...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">ثقافة</span>
-                        <h2 class="news-title">
-                            <a href="#">الفساد يتربص بالمستقبل</a>
-                        </h2>
-                        <p class="news-excerpt">The post الفساد يتربص بالمستقبل appeared first on Hespress - هسبريس جريدة إلكترونية مغربية.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">رياضة</span>
-                        <h2 class="news-title">
-                            <a href="#">الحكومة تصلح تعامل التجار بالشيكات</a>
-                        </h2>
-                        <p class="news-excerpt">تابعت الحكومة، في مجلسها المنعقد اليوم الخميس برئاسة عزيز أخنوش، عرضا حول &#8220;الاستراتيجية الوطنية للتنمية المستدامة 2035&#8243;، قدمته ليلى بنعلي، وزيرة الانتقال الطاقي والتنمي...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">مستجدات محاكمة ناصيري وبعيوي</a>
-                        </h2>
-                        <p class="news-excerpt">The post مستجدات محاكمة ناصيري وبعيوي appeared first on Hespress - هسبريس جريدة إلكترونية مغربية.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">اقتصاد</span>
-                        <h2 class="news-title">
-                            <a href="#">فعاليات مغربية تُشيد بصمود الشعب الفلسطيني و"القوة التفاوضية للمقاومة"</a>
-                        </h2>
-                        <p class="news-excerpt">بعد عامين من حرب غزة، تتجه الآمال صوب اتفاق لوقف إطلاق النار في قطاع غزة والإفراج عن رهائن وأسرى، ينتظر توقيعه الخميس في مصر، ليَضع &#8220;نقطة نهاية&#8221; لحرب مدمرة شدت أنظار ال...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">اقتصاد</span>
-                        <h2 class="news-title">
-                            <a href="#">الحكومة والحوار مع "شباب زد"</a>
-                        </h2>
-                        <p class="news-excerpt">The post الحكومة والحوار مع &quot;شباب زد&quot; appeared first on Hespress - هسبريس جريدة إلكترونية مغربية.</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">مجتمع</span>
-                        <h2 class="news-title">
-                            <a href="#">سعر الفضة يسجل ارتفاعا غير مسبوق</a>
-                        </h2>
-                        <p class="news-excerpt">سجّل سعر أونصة الفضة، يوم الخميس، رقمًا قياسيًا بتجاوزه 50 دولارًا، وذلك للمرة الأولى منذ عام 1993 وبدء وكالة بلومبرغ في إصدار بياناتها، في وقت يتزايد فيه الطلب على القيم الآمنة وس...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">ثقافة</span>
-                        <h2 class="news-title">
-                            <a href="#">بايتاس: الحكومة التقطت رسالة شباب "جيل زد".. والحوار يحتاج الطرفين</a>
-                        </h2>
-                        <p class="news-excerpt">بعد تعبيرها الأسبوع الفائت عن تفهمها لمطالب التعبيرات الاحتجاجية لحركة &#8220;جيل زد&#8221; الشبابية واستعدادها للحوار، أكد مصطفى بايتاس، الناطق الرسمي باسم الحكومة الوزير المنتدب ...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">رياضة</span>
-                        <h2 class="news-title">
-                            <a href="#">الملك يعيّن شفيقي أمينا لمجلس التربية</a>
-                        </h2>
-                        <p class="news-excerpt">أعلن المجلس الأعلى للتربية والتكوين والبحث العلمي أن الملك محمدا السادس تفضّل بتعيين فؤاد شفيقي أمينًا عامًا للمجلس، خلفًا لعزيز قيشوح. وتوجه المجلس سالف الذكر، &#8220;بهذه المناسب...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">أمن بني ملال يفك لغز جثة متفحمة</a>
-                        </h2>
-                        <p class="news-excerpt">&#160; تمكنت عناصر المصلحة الولائية للشرطة القضائية بولاية أمن بني ملال، مساء أمس الإثنين فاتح شتنبر الجاري، من توقيف شخص يبلغ من العمر 32 سنة، من ذوي السوابق القضائية العديدة، وذل...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">سياسة</span>
-                        <h2 class="news-title">
-                            <a href="#">أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة</a>
-                        </h2>
-                        <p class="news-excerpt">شاهد :أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">ثقافة</span>
-                        <h2 class="news-title">
-                            <a href="#">شبكات سرية تهدد صحة المغاربة بترويج بطاطس مسمومة</a>
-                        </h2>
-                        <p class="news-excerpt">&#160; كشفت النائبة البرلمانية زينب السيمو أن مدنا مثل طنجة، تطوان، الفنيدق، المضيق، مرتيل والحسمية، تعرف انتشارا كبيرا لشبكات سرية لتوزيع البطاطس المجمدة المعدة للقلي التي تنشط بص...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">مجتمع</span>
-                        <h2 class="news-title">
-                            <a href="#">تصنيف أمريكي يضع الجواهري ضمن أفضل محافظي البنوك المركزية</a>
-                        </h2>
-                        <p class="news-excerpt">&#160; صنفت مجلة &#8220;غلوبال فاينانس&#8221; الأمريكية، والي بنك المغرب، عبد اللطيف الجواهري، ضمن قائمة أفضل محافظي البنوك المركزية في العالم لسنة 2025. ونال السيد الجواهري درجة &...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">رياضة</span>
-                        <h2 class="news-title">
-                            <a href="#">المدرب عبد السلام وادو يتعرض لحادثة سير خطيرة</a>
-                        </h2>
-                        <p class="news-excerpt">&#160; تعرض الإطار المغربي عبد السلام وادو، مدرب نادي أورلاندو بايرتس الجنوب إفريقي لكرة القدم، لحادثة سير خطيرة، بمعية خمسة أعضاء من الفريق، في ساعة متأخرة من ليلة الأحد، أثناء عو...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">رياضة</span>
-                        <h2 class="news-title">
-                            <a href="#">وزارة التعليم توضح بشأن اختفاء مدير أكاديمية بني ملال</a>
-                        </h2>
-                        <p class="news-excerpt">&#160; أعلنت وزارة التربية الوطنية والتعليم الأولي والرياضة، أن مصطفى السليفاني، مدير الأكاديمية الجهوية للتربية والتكوين لجهة بني ملال خنيفرة، تقدّم بطلب الاستفادة من المعاش قبل ب...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">أخبار</span>
-                        <h2 class="news-title">
-                            <a href="#">بلاغ من المكتب الوطني للسكك الحديدية بشأن الـTGV</a>
-                        </h2>
-                        <p class="news-excerpt">&#160; باشر المكتب الوطني للسكك الحديدية الأشغال الكبرى للبنية التحتية بجهة الدار البيضاء، في إطار مشروع القطار فائق السرعة القنيطرة – مراكش، بهدف توفير بنية تحتية ملائمة للاحتياجا...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">سياسة</span>
-                        <h2 class="news-title">
-                            <a href="#">بالفيديو.. أشرف حكيمي يوقف سيارته ليلعب الكرة مع أطفال بالقصر الكبير</a>
-                        </h2>
-                        <p class="news-excerpt">شاهد :بالفيديو.. أشرف حكيمي يوقف سيارته ليلعب الكرة مع أطفال بالقصر الكبير</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">اقتصاد</span>
-                        <h2 class="news-title">
-                            <a href="#">هكذا رحّب مرسيليا الفرنسي بانضمام المدافع المغربي أكرد</a>
-                        </h2>
-                        <p class="news-excerpt">&#160; قلب الدفاع المغربي الدولي نايف أكرد ألوان مرسيليا الفرنسي قادما من وست هام الإنجليزي، حسب ما أعلن النادي المتوسطي الثلاثاء. &#160; &#160; وكتب مرسيليا: “وُلد حيث تشكّل الشمس...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-category">مجتمع</span>
-                        <h2 class="news-title">
-                            <a href="#">“ترامواي” البيضاء يغير مواقيت عمله</a>
-                        </h2>
-                        <p class="news-excerpt">&#160; &#160; أعلنت شركة ترامواي البيضاء، عن عودتها إلى اعتماد التوقيت الشتوي ابتداء من الأسبوع الجاري، بالنسبة لجميع الخطوط (T1.T2 .T3.T4) والوكالات لتجارية. &#160; &#160; وأوضحت ...</p>
-                        <div class="news-meta">
-                            <span class="news-date">2025-10-09 - 18:35</span>
-                            <span>⏱️ 3 دقائق قراءة</span>
-                        </div>
-                    </div>
-                </article>
-                
-            </div>
-        </main>
-
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">الأكثر قراءة</h3>
-                <ul class="trending-list">
-                    
-                    <li>
-                        <a href="#">السيسي: ترامب يستحق جائزة نوبل</a>
-                        <div class="trending-meta">2025-10-09 - 18:35</div>
-                    </li>
-                    
-                    <li>
-                        <a href="#">الأميرة للا حسناء تحضر مؤتمرا بأبوظبي</a>
-                        <div class="trending-meta">2025-10-09 - 18:35</div>
-                    </li>
-                    
-                    <li>
-                        <a href="#">إطلاق برنامج دعم جمعيات الشباب</a>
-                        <div class="trending-meta">2025-10-09 - 18:35</div>
-                    </li>
-                    
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">الفئات</h3>
-                <ul class="footer-links">
-                    <li><a href="#">أخبار المغرب</a></li>
-                    <li><a href="#">السياسة</a></li>
-                    <li><a href="#">الاقتصاد</a></li>
-                    <li><a href="#">الرياضة</a></li>
-                    <li><a href="#">الثقافة</a></li>
-                </ul>
-            </div>
-        </aside>
+    <!-- Single Article View -->
+    <div id="article-container" class="article-page">
+        <!-- Article content will be injected here by JavaScript -->
     </div>
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>المغرب اليوم</h3>
-                <p>منصة إخبارية مهنية تقدم آخر الأخبار والتطورات في المملكة المغربية بشفافية ومهنية.</p>
-            </div>
-            <div class="footer-section">
-                <h3>روابط سريعة</h3>
-                <ul class="footer-links">
-                    <li><a href="#">الرئيسية</a></li>
-                    <li><a href="#">عن المغرب اليوم</a></li>
-                    <li><a href="#">اتصل بنا</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>الفئات</h3>
-                <ul class="footer-links">
-                    <li><a href="#">أخبار المغرب</a></li>
-                    <li><a href="#">السياسة</a></li>
-                    <li><a href="#">الاقتصاد</a></li>
-                    <li><a href="#">الرياضة</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 المغرب اليوم - جميع الحقوق محفوظة | آخر تحديث: <span id="footerTime">الأربعاء 8 أكتوبر 2025 - 01:27</span></p>
-        </div>
-    </footer>
 
     <script>
+        // Articles data
+        const articlesData = {
+            
+            "article-1": {
+                title: "المغاربة يترقبون أول خطاب للملك محمد السادس بعد احتجاجات "جيل زد"",
+                content: "تتجه أنظار المغاربة بمختلف فئاتهم الاجتماعية، غدا الجمعة، صوب الخطاب المرتقب للملك محمد السادس في افتتاح السنة التشريعية الخامسة من الولاية التشريعية الحادية عشرة بمقر البرلمان، وس...",
+                category: "أخبار",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-2": {
+                title: "من يتحدث باسم "جيل زد"؟ .. النخبة والشباب والمغرب الذي نريد",
+                content: "&#8220;جيل Z &#8221; لا يطلب من أحد أن يتكلم باسمه؛ بل أن يتوقف عن الكلام باسمه. بهذه العبارة يمكن اختصار المأزق الحقيقي الذي فجّرته الرسالة المفتوحة الصادرة مؤخرًا بعنوانٍ صريح: “...",
+                category: "سياسة",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-3": {
+                title: "تشكيلة "الأسود" للقاء البحرين وديا",
+                content: "كشف الناخب الوطني وليد الركراكي مدرب المنتخب المغربي لكرة القدم، عن التشكيلة التي ستواجه منتخب البحرين وديا، على أرضية ملعب المجمع الرياضي الأمير مولاي عبد الله بمدينة الرباط، في ا...",
+                category: "اقتصاد",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-4": {
+                title: "الجزائر تتأهل رسميا إلى كأس العالم",
+                content: "وضع منتخب الجزائر حدا لسوء الحظ الذي لازمه في التأهل لنهائيات كأس العالم لكرة القدم، وصعد أخيرا للنسخة المقبلة لـ”المونديال” بعد غياب 12 عاما. وحقق منتخب الجزائر فوزا سهلا 3 / صفر ...",
+                category: "مجتمع",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-5": {
+                title: "السيسي: ترامب يستحق جائزة نوبل",
+                content: "أكد الرئيس المصري عبد الفتاح السيسي لنظيره الأمريكي دونالد ترامب في اتصال هاتفي، الخميس، بأنه يستحق &#8220;عن جدارة&#8221; جائزة نوبل للسلام عن دوره في التوصل إلى اتفاق وقف إطلاق ا...",
+                category: "أخبار",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-6": {
+                title: "الأميرة للا حسناء تحضر مؤتمرا بأبوظبي",
+                content: "شاركت الأميرة للا حسناء، رئيسة مؤسسة محمد السادس لحماية البيئة، اليوم الخميس بأبوظبي، في حفل استقبال أقيم على شرف كبار الشخصيات المشاركين في &#8220;المؤتمر العالمي للحفاظ على الطبي...",
+                category: "سياسة",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-7": {
+                title: "إطلاق برنامج دعم جمعيات الشباب",
+                content: "أعلنت وزارة الشباب والثقافة والتواصل إطلاق برنامج دعم جمعيات الشباب برسم سنة 2025، الذي سيتم تنزيله على الصعيد الجهوي، مُحددة سقف الدعم المالي المخصص لكل مشروع في 10 آلاف درهم. وأف...",
+                category: "اقتصاد",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-8": {
+                title: "تقرير: المغرب يشهد صفقات اندماج واستحواذ بقيمة 46 مليار سنتيم",
+                content: "كشف تقرير حديث للموقع المتخصص &#8220;Dealmakersafrica&#8221; عن بلوغ القيمة الإجمالية للصفقات الاستثمارية المتعلّقة بالاندماج والاستحواذ في المغرب، خلال النصف الأول من السنة الجاري...",
+                category: "مجتمع",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-9": {
+                title: "الفساد يتربص بالمستقبل",
+                content: "The post الفساد يتربص بالمستقبل appeared first on Hespress - هسبريس جريدة إلكترونية مغربية.",
+                category: "أخبار",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-10": {
+                title: "الحكومة تصلح تعامل التجار بالشيكات",
+                content: "تابعت الحكومة، في مجلسها المنعقد اليوم الخميس برئاسة عزيز أخنوش، عرضا حول &#8220;الاستراتيجية الوطنية للتنمية المستدامة 2035&#8243;، قدمته ليلى بنعلي، وزيرة الانتقال الطاقي والتنمي...",
+                category: "سياسة",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-11": {
+                title: "مستجدات محاكمة ناصيري وبعيوي",
+                content: "The post مستجدات محاكمة ناصيري وبعيوي appeared first on Hespress - هسبريس جريدة إلكترونية مغربية.",
+                category: "اقتصاد",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-12": {
+                title: "فعاليات مغربية تُشيد بصمود الشعب الفلسطيني و"القوة التفاوضية للمقاومة"",
+                content: "بعد عامين من حرب غزة، تتجه الآمال صوب اتفاق لوقف إطلاق النار في قطاع غزة والإفراج عن رهائن وأسرى، ينتظر توقيعه الخميس في مصر، ليَضع &#8220;نقطة نهاية&#8221; لحرب مدمرة شدت أنظار ال...",
+                category: "مجتمع",
+                source: "Hespress",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-13": {
+                title: "أخبار المغرب: أمن بني ملال يفك لغز جثة متفحمة",
+                content: "&#160; تمكنت عناصر المصلحة الولائية للشرطة القضائية بولاية أمن بني ملال، مساء أمس الإثنين فاتح شتنبر الجاري، من توقيف شخص يبلغ من العمر 32 سنة، من ذوي السوابق القضائية ال...",
+                category: "أخبار",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-14": {
+                title: "أخبار المغرب: أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة",
+                content: "شاهد :أداء 100 درهم عن كل يوم لمدة شهرين.. محكمة الحسيمة تصدر أول عقوبة بديلة",
+                category: "مجتمع",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-15": {
+                title: "أخبار المغرب: شبكات سرية تهدد صحة المغاربة بترويج بطاطس مسمومة",
+                content: "&#160; كشفت النائبة البرلمانية زينب السيمو أن مدنا مثل طنجة، تطوان، الفنيدق، المضيق، مرتيل والحسمية، تعرف انتشارا كبيرا لشبكات سرية لتوزيع البطاطس المجمدة المعدة للقلي ال...",
+                category: "تكنولوجيا",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-16": {
+                title: "أخبار المغرب: تصنيف أمريكي يضع الجواهري ضمن أفضل محافظي البنوك المركزية",
+                content: "&#160; صنفت مجلة &#8220;غلوبال فاينانس&#8221; الأمريكية، والي بنك المغرب، عبد اللطيف الجواهري، ضمن قائمة أفضل محافظي البنوك المركزية في العالم لسنة 2025. ونال السيد الجوا...",
+                category: "ثقافة",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-17": {
+                title: "أخبار المغرب: المدرب عبد السلام وادو يتعرض لحادثة سير خطيرة",
+                content: "&#160; تعرض الإطار المغربي عبد السلام وادو، مدرب نادي أورلاندو بايرتس الجنوب إفريقي لكرة القدم، لحادثة سير خطيرة، بمعية خمسة أعضاء من الفريق، في ساعة متأخرة من ليلة الأحد...",
+                category: "أخبار",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-18": {
+                title: "أخبار المغرب: وزارة التعليم توضح بشأن اختفاء مدير أكاديمية بني ملال",
+                content: "&#160; أعلنت وزارة التربية الوطنية والتعليم الأولي والرياضة، أن مصطفى السليفاني، مدير الأكاديمية الجهوية للتربية والتكوين لجهة بني ملال خنيفرة، تقدّم بطلب الاستفادة من ال...",
+                category: "مجتمع",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-19": {
+                title: "أخبار المغرب: بلاغ من المكتب الوطني للسكك الحديدية بشأن الـTGV",
+                content: "&#160; باشر المكتب الوطني للسكك الحديدية الأشغال الكبرى للبنية التحتية بجهة الدار البيضاء، في إطار مشروع القطار فائق السرعة القنيطرة – مراكش، بهدف توفير بنية تحتية ملائمة...",
+                category: "تكنولوجيا",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-20": {
+                title: "أخبار المغرب: بالفيديو.. أشرف حكيمي يوقف سيارته ليلعب الكرة مع أطفال بالقصر الكبير",
+                content: "شاهد :بالفيديو.. أشرف حكيمي يوقف سيارته ليلعب الكرة مع أطفال بالقصر الكبير",
+                category: "ثقافة",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-21": {
+                title: "أخبار المغرب: هكذا رحّب مرسيليا الفرنسي بانضمام المدافع المغربي أكرد",
+                content: "&#160; قلب الدفاع المغربي الدولي نايف أكرد ألوان مرسيليا الفرنسي قادما من وست هام الإنجليزي، حسب ما أعلن النادي المتوسطي الثلاثاء. &#160; &#160; وكتب مرسيليا: “وُلد حيث ت...",
+                category: "أخبار",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            },
+            "article-22": {
+                title: "أخبار المغرب: “ترامواي” البيضاء يغير مواقيت عمله",
+                content: "&#160; &#160; أعلنت شركة ترامواي البيضاء، عن عودتها إلى اعتماد التوقيت الشتوي ابتداء من الأسبوع الجاري، بالنسبة لجميع الخطوط (T1.T2 .T3.T4) والوكالات لتجارية. &#160; &#16...",
+                category: "مجتمع",
+                source: "Alayam24",
+                date: "2025-10-09",
+                time: "19:07",
+                readTime: "3 دقائق قراءة"
+            }
+        };
+
+        // Update time function
         function updateTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('ar-MA', { 
@@ -889,13 +1110,109 @@
             const year = now.getFullYear();
             
             const dateString = `${weekday} ${day} ${month} ${year}`;
+            const fullDateTime = `${dateString} - ${timeString}`;
             
-            document.getElementById('liveTime').textContent = `${dateString} - ${timeString}`;
-            document.getElementById('footerTime').textContent = `${dateString} - ${timeString}`;
+            document.getElementById('liveTime').textContent = fullDateTime;
+            document.getElementById('updateTime').textContent = timeString;
+            document.getElementById('footerTime').textContent = fullDateTime;
         }
-        
-        setInterval(updateTime, 60000);
-        updateTime();
+
+        // Article navigation
+        function showArticle(articleId) {
+            const article = articlesData[articleId];
+            if (!article) return;
+            
+            document.getElementById('main-site').style.display = 'none';
+            document.getElementById('article-container').style.display = 'block';
+            document.getElementById('article-container').innerHTML = `
+                <button class="back-button" onclick="showMainSite()">
+                    <i class="fas fa-arrow-right"></i> العودة إلى الأخبار
+                </button>
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">${article.title}</h1>
+                        <div class="article-meta">
+                            <span class="news-category">${article.category}</span>
+                            <span class="news-source">${article.source}</span>
+                            <span class="news-date">${article.date} - ${article.time}</span>
+                            <span>${article.readTime}</span>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p>${article.content}</p>
+                        <p>هذا الخبر يتم تحديثه باستمرار من خلال مصادر موثوقة لتقديم أحدث المعلومات للقارئ المهتم.</p>
+                    </div>
+                </article>
+            `;
+            
+            // Update URL without page reload
+            history.pushState({ articleId: articleId }, '', `#${articleId}`);
+        }
+
+        function showMainSite() {
+            document.getElementById('main-site').style.display = 'block';
+            document.getElementById('article-container').style.display = 'none';
+            history.pushState({}, '', '#');
+        }
+
+        // Category filtering
+        function filterByCategory(category) {
+            const newsCards = document.querySelectorAll('.news-card');
+            newsCards.forEach(card => {
+                const cardCategory = card.querySelector('.news-category').textContent;
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTime();
+            setInterval(updateTime, 60000);
+            
+            // Article click events
+            document.querySelectorAll('.news-card, .trending-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const articleId = this.getAttribute('data-article-id');
+                    showArticle(articleId);
+                });
+            });
+            
+            // Category click events
+            document.querySelectorAll('[data-category]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const category = this.getAttribute('data-category');
+                    filterByCategory(category);
+                    
+                    // Update active nav
+                    document.querySelectorAll('.nav-categories a').forEach(a => {
+                        a.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+            
+            // Handle browser back/forward
+            window.addEventListener('popstate', function(event) {
+                if (location.hash && location.hash.startsWith('#article-')) {
+                    const articleId = location.hash.substring(1);
+                    showArticle(articleId);
+                } else {
+                    showMainSite();
+                }
+            });
+            
+            // Check URL on load
+            if (location.hash && location.hash.startsWith('#article-')) {
+                const articleId = location.hash.substring(1);
+                showArticle(articleId);
+            }
+        });
     </script>
 </body>
 </html>
